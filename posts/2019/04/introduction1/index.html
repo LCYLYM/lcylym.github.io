@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>[VPS教程][壹][基础][ssh连接] - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">[VPS教程][壹][基础][ssh连接]</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2019-04-24 19:03</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/my-project/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">个人项目</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/article/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">所有文章</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/technology/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">技术-脚本-软件</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/question/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">那些奇奇怪怪的问题</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/教程/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#教程</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/免费/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#免费</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/地址/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#地址</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/安装/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#安装</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/网站/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#网站</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/虚拟主机/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#虚拟主机</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/添加/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#添加</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/萌新/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#萌新</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/大佬/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#大佬</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/端口/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#端口</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:heading {"level":4} -->
+<h4>写给小白[萌新]看的，大佬勿喷</h4>
+<!-- /wp:heading -->
+
+<!-- wp:heading -->
+<h2><strong>注：萌新莫要把虚拟主机和VPS搞混了！不一样的-_-||</strong></h2>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>鉴于之前在群里面看到过有纯萌新萌的连买的vps都不知道怎么连接，也不知道怎么用…… 又不百度[还瞎嚷嚷]……故做此教程</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>这里我就用某家idc的vps做个教程，其他家的都差不多（大同小异）</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>壹、下载ssh连接工具</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>用ssh连接vps当然需要工具，你可以用Windows自带的命令提示符（CMD）[不推荐]来连接，也可以用putty、Bitvise SSH Client、xshell等来连接，博主推荐用xshell来连接vps</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>先去官网下载个xshell（下载试用一个月的专业版或者注册获取永久免费的家庭教育版）</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a href="https://www.netsarang.com/zh/all-downloads/" target="_blank" rel="noreferrer noopener" aria-label="官网下载地址传送： https://www.netsarang.com/zh/all-downloads/ （在新窗口打开）"><strong>官网下载地址传送： https://www.netsarang.com/zh/all-downloads/ </strong></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>安装完后图标</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13176,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-14.png" alt="" class="wp-image-13176"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4><strong>贰、连接</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><strong>打开你购买vps的网站，找到控制台（或已购买的vps）点进去</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13177,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-13.png" alt="" class="wp-image-13177"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>找到vps的ip地址和root密码（有时商家会给出来有时要自己设置）</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13178,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-11.png" alt="" class="wp-image-13178"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":13183,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-9.png" alt="" class="wp-image-13183"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":13179,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-12.png" alt="" class="wp-image-13179"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>打开xshell6，点击新建会话</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13180,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-8.png" alt="" class="wp-image-13180"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>弹出配置窗口</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13181,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-1.png" alt="" class="wp-image-13181"/><figcaption><strong>ssh端口一般都是22，除非是nat机或者自己改了</strong></figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>点击确定，双击刚刚添加的会话连接</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13182,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接-10.png" alt="" class="wp-image-13182"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>会提示你输入账号（一般是：root）输入密码（就是root密码）</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":13185,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接1-1.png" alt="" class="wp-image-13185"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":13186,"sizeSlug":"large"} -->
+<figure class="wp-block-image size-large"><img src="/img/ssh连接1-2.png" alt="" class="wp-image-13186"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><strong>然后如果你的vpsip没有被墙或者关机的话，就可以连上了。。。</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>如果root密码是商家给的，建议修改成自己的密码，输入 </strong><code><strong>passwd</strong></code> <strong>修改密码，输入两遍新密码即可（输入的密码不可见，别以为没输入进去）</strong></p>
+<!-- /wp:paragraph -->
+          </div>
+        
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：3968</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        if (loader) loader.style.display = 'none';
+      });
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

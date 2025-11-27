@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>一半人在拼命，一半人在认命，在家里的那么多天，你属于哪种人？ - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">一半人在拼命，一半人在认命，在家里的那么多天，你属于哪种人？</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2020-02-22 22:18</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/article/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">所有文章</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/share/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">文章-音乐-视频</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/抖音/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#抖音</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/数量/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#数量</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/抱怨/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#抱怨</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/淘汰/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#淘汰</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/娱乐/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#娱乐</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:heading {"level":4} -->
+<h4><em>文章来源：中考化学(zkhx100)</em>[微信公众号]</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>        之前，在朋友圈看到一篇文章《抖音是如何毁掉我们的？》，其实这篇文中，抖音只是一个具象化代表，作者想讲的是以抖音为代表的一众以算法为内核的娱乐化APP。 每个时代都会有一些淘汰机制，而现在的时代，会根据自制力和信息筛选能力对人进行淘汰。 但总有一些人是不愿惊醒的，等他们发现自己一事无成时，会选择抱怨别人、抱怨社会、然后把希望寄托给下一代，在这群人眼里错的不是他们，而是社会。希望这个人不会是你。 </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:video {"id":2052} -->
+<figure class="wp-block-video"><video controls src="https://loli.by/wp-content/uploads/2020/02/jiayou.mp4"></video></figure>
+<!-- /wp:video -->
+
+<!-- wp:heading {"level":4} -->
+<h4><strong>层次越低的人&nbsp;&nbsp;越喜欢花时间在娱乐上&nbsp;</strong> </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>        抖音刚推出“爆视频”的时候，单单评论数就超过一百万，播放数量过千万。 这几乎是我们这些文字工作者难以企及的数量。而数量背后，潜藏着一个个为此付出时间与精力的人。 除此之外，相信你在朋友圈也看到过不少这样的话：“中了抖音的毒”、“刷抖音根本停不下来啊啊啊，一看表竟然刷了三个多小时......” 这一点相信刷过抖音、亦或者是刷过快手、火山小视频等等各种小视频软件的人都会深有感受。 如果你在路边、休息处看到一个人手指连动笑的合不拢嘴，那大概就是在刷小视频了。 我们会不自觉的深陷其中，蓦然之间发现时间已经过去了几个小时。 尼尔·波兹曼在《娱乐至死》里这样写过这样的一段话： “一切公众话语日渐以娱乐的方式出现，并成为一种文化精神。我们的政治、宗教、新闻、体育、教育和商业都心甘情愿地成为娱乐的附庸，毫无怨言，甚至无声无息，其结果是我们成了一个娱乐至死的物种。” 层次越低的人，越喜欢花时间在娱乐上。 越来越多的人患上了网络依存症，对各类娱乐新闻上瘾、产生依赖，人云亦云，附和跟风，沉溺在虚拟的世界中不能自拔。我害怕长久以往，自己会变成一个透明的躯壳，脑袋空空、沉浸于感官娱乐。 有人说，你的时间花在哪，你就会成为什么样的人。格局高的人，不会花太多时间在娱乐上。 我们正在爱上这些使我们丧失思考能力的工业技术。抖音、快手、抖音、微博这些软件正在飞速地强化我们对新奇事物的需求度，并拉高我们的敏感度。同时降低的就是对文字的需求度与耐心度。 刷多了抖音、快手、微博这些软件之后，我们就会形成一种惯性：没有耐心去读一本长文或者书籍。 更没有时间去思考，因为我们总是在期待着下一个引爆眼球的新奇事物，等待着它在视频中直接了当的呈现。 而在被轰炸多了之后，我们就会逐渐爱上这种“被喂食”的感觉。而当“被喂食”形成一种习惯之后，我们的就会惰于思考，耐心以及深挖问题的能力就会被逐渐抹杀。 <strong>          </strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4><strong>你每时每刻傻呵呵的沉浸其中&nbsp;&nbsp;换来的都是经营者的盆满钵满&nbsp;</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>        还记得盛大公司吗？ 这是一家十分“传奇”的公司，2001年年底，盛大账面上只剩下大约30万美金，陈天桥倾囊而出，买下韩国一款二线游戏《传奇》的中国代理权。 2002年，《传奇》同时在线人数突破60万，成为当时世界上最大规模的网络游戏，盛大月均销售额超过千万，市场占有率超过六成。 但是陈天桥在接受记者采访时却不止一次说过：“我从来不玩《传奇》，因为这是个烂游戏，浪费我的时间，但是盛大是个好公司”。 但是不可否认的是，这个备受追捧的烂游戏确实吸来了千万销售额。 看到了么？你每时每刻傻呵呵的沉浸其中，换来的都是经营者的盆满钵满。 “不知道为什么，刷抖音的时候感觉那么开心，可是刷完之后却分外空虚，变得很丧，而且更自卑了”一个粉丝在凌晨一点多私信我。 他说他刚在床上刷完抖音，然后就失眠了。 在孤寂无人的夜晚，我们最容易感受到自己的无助与空虚。 我回复说：“因为你爱上了一个虚拟且充满新奇的世界，但是你依旧碌碌无为，你的生活仍然平平无奇。” 我称抖音、火山小视频、今日头条、快手等等以算法推荐为内核的软件为：毒品软件。 一款类似抖音的 APP，背后都是一个强大的运营团队，有着专业的消费者行为学作支撑，用尽最前沿的科技，最详尽的数据，通过声、光、交互、反馈等全方位途径，在各种心理学、行为经济学、认知神经科学等理论指导下，精心打造 — 目的是什么？为了创造一个虚拟空间，来消磨你的时间。 它带来的满足感太容易获得，而一旦你习惯了这种“唾手可得”的满足感，就不愿再去做那些“高投入”的事情了。 比如在高度自律的状态下完成作业、思考问题。 在这个被娱乐塞满的世界里，当没有足够强大的自控力时，我们就会因为沉迷各种诱惑而“被碌碌无为”。   </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4><strong>盖茨家把13岁定为得到手机的年限&nbsp;&nbsp;乔布斯不允许自己的孩子们用iPad&nbsp;</strong> </h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>        乔布斯生前，曾有记者采访他： 您的三个孩子应该很爱玩iPad吧？ 身为苹果公司创始人，乔布斯却回答： 他们没用iPad，我们限制孩子在家使用电子产品。 和很多家庭不同，乔布斯几乎每个晚上都会和孩子们一起吃晚饭，他们讨论各种各样的话题，没人会抱着iPad或手机看。 不仅如此，国外很多电子工程师都不让自己的孩子接触电子智能产品。 因为作为研发者的他们，更清楚过度使用电子产品对孩子的隐性伤害。 比尔盖茨曾在采访中说过，他认为13岁是孩子拥有第一部手机的合适年龄。 他、珍妮弗、以及1999年出生的儿子罗里·盖茨都是在过了13岁生日后才被允许使用手机，小女儿菲比则在期待着13岁生日时得到自己的第一部手机。 “我们家把13岁定为得到手机的年限。”盖茨说，鉴于这项规定，孩子们从学校回家后常向他抱怨说，“其他孩子都有手机，我是唯一一个没有手机的人，这令人尴尬”。 他们甚至把孩子们送到传统的，完全没有智能和科技产品的Waldorf学校，在这个学校的校园里根本就找不到电脑！ </p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4><strong>能够掌控时间的人&nbsp;&nbsp;才能掌控自己的一生</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>&nbsp;       我们看到的是电子产品正在飞速低龄化，抖音快手已经迅速占据了学生的生活。 而因为缺乏自制力，他们会沉浸其中无法自拔，在最应当拼搏的年纪里选择安逸，在价值观形成之际被灌输进大量的光怪陆离与不正之风。 于是他们开始模仿，追逐着未成年怀孕风当宝妈、跟着小青年跳社会摇、以为低胸博眼球就能赚大钱......当管制不利时，堕落便自此开始。 那些我们所热爱的东西，正在一步步把我们连根拔起。 在作家周冲的文章中看到过这样一段话： 当你的时间不再用于深度学习， 当你的注意力被他人瓜分， 当你只看综艺与电视剧， 当你在群体中呆的时间越来越长， 当你执行力越来越差， 当你评价他人的次数越来越多， 当你抱怨越来越频繁， 当你回想往事的频率越来越高...... 毁灭就已经发生了。 如何分配你的时间，取决于你。 未来，在时间这个战场上，有两门生意会特别值钱： 第一，就是帮别人省时间。 第二，就是帮别人把省下来的时间浪费在那些美好的事物上。 能够掌控时间的人，才能掌控自己的一生。 这座城市， 一半人在拼命，一半人在认命； 一半人在抢时间，一半人在耗时间； 一半人在燃烧青春，一半人在虚度青春。 你愿意做哪一半的人。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4><em>文章来源：中考化学(zkhx100)</em>[微信公众号]</h4>
+<!-- /wp:heading -->
+          </div>
+        
+        
+          <footer class="border-t border-amber-500/40 px-4 py-4 bg-black/80">
+            <section class="comments">
+  <h2>评论（4）</h2>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://rbq.lu" rel="nofollow">小白酱</a> · 2020-02-23 01:04:35</div>
+    <p>唉，咱就属于不能合理利用时间的那类人</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">lym@nizoukai.cn · 2020-03-05 07:40:39</div>
+    <p>？你是想？</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://www.xn2001.com" rel="nofollow">乐心湖</a> · 2020-03-22 14:46:33</div>
+    <p>这里我必须为抖音正名，
+一个软件，根据算法为你推送新的视频。
+你长期沉迷在那些非主流那些毫无意义的欢笑声，你的抖音就是这个样子。
+如果你经常性点赞新闻类的资讯，你会发现你的抖音是一个了解新闻的最快方式。</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">LYM · 2020-03-25 10:16:26</div>
+    <p>主要是看使用人怎么用</p>
+  </article>
+</section>
+          </footer>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：3828</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        if (loader) loader.style.display = 'none';
+      });
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
