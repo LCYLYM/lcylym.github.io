@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>那些看起来并不努力的同学，为什么成绩反而更好？ - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考 frontend_template 风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">BLOG</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text uppercase">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://lcylym.github.io/blog/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://lcylym.github.io/blog/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://lcylym.github.io/blog/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://lcylym.github.io/blog/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://lcylym.github.io/blog/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">那些看起来并不努力的同学，为什么成绩反而更好？</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2021-03-28 09:12</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/categories/sharea/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">好文分享</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/文章/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#文章</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/真的/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#真的</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/罢了/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#罢了</a>
+                
+              
+            
+          </div>
+        </header>
+        <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+          <!-- wp:paragraph -->
+<p> 经常有人问，明明我努力做了那么多，可是为什么还是得不到好的结果？ 为什么那些没努力学习的同学，反而成绩比我好？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>我天天自习、挑灯夜战，却对成绩的提高并没有太大的帮助；</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>别人吊儿郎当、一副满不在乎的样子，学习起来却毫不费力。 为什么我那样的努力却换不来更好的结果？ 对这类问题，有各种各样的回答，有人鼓励鞭策，有人灌输鸡汤，有人循循善诱，有人冷嘲热讽。 借用雷军说过的一句话：<strong>“永远不要试图用战术上的勤奋，掩饰战略上的懒惰。”</strong> 在这里，天天自习、挑灯夜战看似很努力地学习，可以先暂定为“战术上的勤奋”；努力认真学习的结果却依旧缺乏明确的学习目标和动机，那就是战略上的懒惰。 大家都清楚的一点是，学习最好的人从来都不是一天到晚苦哈哈拼命学习的人，而往往是那些把生活安排得多姿多彩的人—— 他们智商与情商皆高，往往懂得所谓努力并非流于表面； 而那些貌似学习很刻苦的人，其实效率并不高。<br>天天自习、挑灯夜战、头悬梁锥刺股对你的最大意义，只不过是营造了一个“苦苦努力”的幻象，换取对自己的心灵安慰罢了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img src="https://loli.by/wp-content/uploads/2021/03/frc-07e55a647fa90cccfddee70d32e4156e.jpeg" alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>举几个身边的例子： <strong>女孩A：</strong>她总是喜欢找我推荐一些好的参考书、好的习题资料，还要求是逼格很高的。所以我每次也都会认真给她挑选，并告诉她哪些题型需要重点掌握。<br>有一次我跟她闲聊，你告诉我一下，上一本书中我重点强调的那个题目你记住了吗？她说，忘了。第二天，我看她的朋友圈上说：又看完了一本书。 <img src="https://loli.by/wp-content/uploads/2021/03/frc-6330438afa1e077ff1d525f5535ef86d.gif"><strong>男孩子B：</strong>特别喜欢去自习室，然后每次在朋友圈都会看见他的文字：最近很累；快考试了，最后几天拼了；早出晚归...觉得他真的很努力。<br>可是，该不过的，还是过不了。他的所有考试，留下的似乎都是各种波折和无奈。 <img src="https://loli.by/wp-content/uploads/2021/03/frc-6330438afa1e077ff1d525f5535ef86d.gif"><strong>女孩子C：</strong>参加各种寒假、暑假补习班，只想让成绩更好点。每天也是早出晚归，周末还泡图书馆。带着教材、试卷、参考书。<br>可是，这一切都没有用。因为她还带了手机。 她一上午的学习其实都是在刷朋友圈刷微博，这种所谓的努力，其实只是看起来很努力而已。 <img src="https://loli.by/wp-content/uploads/2021/03/frc-6330438afa1e077ff1d525f5535ef86d.gif"> 所以，是不是有很多人都这样？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>你每天熬夜学习，但大多数时候都是在玩手机。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>你每天早早去上课，但大多数时候是在课堂上补昨晚的觉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>你在图书馆一坐就是一天，但真的就只是坐了一天。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>你每天都在做题，但总没有真正掌握过一道题。 在我们身边，总有一些笔记记的很认真的人，但是考试成绩不理想；也总有那些学习成绩非常好，但看起来并不怎么认真的人。<br>很多人把他们定义为聪明，而我认为，他们只是在学习的时候，摒弃了诱惑一心一意的在努力，那些努力没有让别人看到，那段时间也没有其他的干扰，在玩儿的也用心的在玩。 类似的例子每天都在我们身边发生着，这些例子带给我们的启示是： <strong>如果不在开始努力之前就设定一个目标，你的努力就很容易陷入“我这么努力有什么用”的自怨自艾中。</strong><strong>如果你的努力不和结果挂钩，那么你就只能沉浸在“我已经很努力了”的幻想当中，并错把受苦的体验当成努力的过程。</strong> 比不努力更可怕的，是你自以为“已经很努力了”，却“没有任何实质的进展”，导致你反过头来质疑“应不应该努力”这件事，甚至把问题引向了拷问社会的公平性问题，这对你的人生其实没有任何意义。 因此在努力之前，每个人都应该先问问自己：<br><em>我努力的目标是什么？</em><em>我现在所付出的努力和我的目标有因果关系吗？</em><em>为了达成这个目标，真的需要我埋头学习八小时吗？</em><em>这八小时里我已经全力以赴了吗？</em><strong>因为毕竟，所有的努力，都不是给别人看的，这些努力，是否真正到达了内心，变成了你的能力。</strong><br><strong>没有目标的努力，没有计划的奋斗，都只是作秀。</strong> 你的生活，和别人看你的生活，是否是一样的；那些所谓的努力时光，是真的头脑风暴了，还是，只是看起来很努力而已。 人生不应该是充满痛苦疲劳的拉锯战，而应该是有的放矢地走走停停。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>文章来源：本文转自中考网，版权属于原作者，如有侵权，请联系我们处理。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a target="_blank" href="http://mp.weixin.qq.com/s?__biz=MzA3NTkwNDA0OQ==&amp;mid=2659206698&amp;idx=1&amp;sn=941b54d983ffa987bccb73aee86a6e59&amp;chksm=841d8374b36a0a6243cbd678ac0bcaaf0e12a03c2ee46de1ef29b52bd9cad41eb6ebcce2e0f1&amp;scene=21#wechat_redirect" rel="noreferrer noopener"></a></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><a target="_blank" href="http://mp.weixin.qq.com/s?__biz=MzA3NTkwNDA0OQ==&amp;mid=2659206467&amp;idx=1&amp;sn=97b6e4e7ede78f72140a67ad023c1951&amp;chksm=841d801db36a090b8b743483b3aeed156732872c4cf75a50840b97a25be15a75768e2d72397f&amp;scene=21#wechat_redirect" rel="noreferrer noopener"></a></p>
+<!-- /wp:paragraph -->
+        </div>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="uppercase tracking-[0.25em]">STATUS</span>
+          <span class="text-emerald-400 text-[10px]">OK</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：3442</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="uppercase tracking-[0.25em] mb-2">NAV</div>
+        <a href="https://lcylym.github.io/blog/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://lcylym.github.io/blog/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://lcylym.github.io/blog/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://lcylym.github.io/blog/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">STATUS:</span>
+          <span class="text-emerald-400 font-bold">ONLINE</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

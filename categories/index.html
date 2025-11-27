@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>分类 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考 frontend_template 风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">BLOG</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text uppercase">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://lcylym.github.io/blog/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://lcylym.github.io/blog/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://lcylym.github.io/blog/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://lcylym.github.io/blog/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://lcylym.github.io/blog/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <h2>所有分类</h2>
+  <ul>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/福利/">♂~福利~♀</a>
+        （6 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/my-project/">个人项目</a>
+        （25 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/免费-优质vps推荐/">免费/优质VPS推荐</a>
+        （1 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/fan_fiction/">同人</a>
+        （2 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/sharea/">好文分享</a>
+        （12 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/article/">所有文章</a>
+        （64 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/collection/">批量采集</a>
+        （7 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/technology/">技术-脚本-软件</a>
+        （33 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/share/">文章-音乐-视频</a>
+        （24 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/bot/">机器采集</a>
+        （1 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/investigation/">民意调查</a>
+        （1 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/question/">那些奇奇怪怪的问题</a>
+        （5 篇）
+      </li>
+    
+      <li>
+        <a href="https://lcylym.github.io/blog/categories/qvq/">随笔</a>
+        （3 篇）
+      </li>
+    
+  </ul>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">STATUS:</span>
+          <span class="text-emerald-400 font-bold">ONLINE</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>标签：抽奖 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考 frontend_template 风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">BLOG</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text uppercase">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://lcylym.github.io/blog/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://lcylym.github.io/blog/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://lcylym.github.io/blog/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://lcylym.github.io/blog/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://lcylym.github.io/blog/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <h2>标签：抽奖</h2>
+  <ul>
+    
+      <li>
+        2019-04-23 ·
+        <a href="https://lcylym.github.io/blog/posts/2019/04/%e5%85%8d%e8%b4%b9%e9%a2%86%e5%8f%96steam%e5%b0%8f%e6%b8%b8%e6%88%8f%e6%8a%bd%e5%a5%96%e5%be%97%e5%a4%a7%e4%bd%9c/">免费领取steam小游戏~抽奖得大作</a>
+      </li>
+    
+  </ul>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">STATUS:</span>
+          <span class="text-emerald-400 font-bold">ONLINE</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

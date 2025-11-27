@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>为什么好人要经历“九九八十一难 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考 frontend_template 风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">BLOG</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text uppercase">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://lcylym.github.io/blog/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://lcylym.github.io/blog/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://lcylym.github.io/blog/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://lcylym.github.io/blog/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://lcylym.github.io/blog/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">为什么好人要经历“九九八十一难</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2021-07-28 22:21</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/categories/article/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">所有文章</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/categories/share/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">文章-音乐-视频</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/categories/bot/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">机器采集</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/categories/sharea/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">好文分享</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/疫情/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#疫情</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/娱乐/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#娱乐</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/图片/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#图片</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/截图/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#截图</a>
+                
+              
+                
+                
+                  <a href="https://lcylym.github.io/blog/tags/回复/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#回复</a>
+                
+              
+            
+          </div>
+        </header>
+        <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+          <p>[toc]</p>
+
+<!-- wp:image {"id":61014,"sizeSlug":"large","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-large is-style-rounded"><img src="https://loli.by/wp-content/uploads/2021/07/LMXQM_TP114C0M2G8BR-1024x256.png" alt="" class="wp-image-61014"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br>最近，堪称“千年一遇”的极大暴雨侵袭了河南。<br>短短几天，河南多地就变成了一座座“水城”。<br>微博热搜上，娱乐新闻一一撤去，取而代之的几乎都是关于大雨的消息。<br>千人同心，则得千人之力！<br>很快，社会各方力量纷纷向河南伸出了援手，腾讯、美团、阿里等大厂各捐上亿元，数百名网红、明星也捐款、捐物、驰援前线。<br>随着捐款的队伍越来越庞大，有网友整理出了一张明星捐款汇总表。<br>让原本的明星暖心行动，渐渐变了味：<br><strong>100万成了捐款的“及格线”，捐得多的就正能量盖章，捐得少的，则成为众矢之的。</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61013,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://loli.by/wp-content/uploads/2021/07/LO2VGR03UGSWKOAEXZF-549x1024.jpg" alt="" class="wp-image-61013"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br>图源：微博网友<br>捐款少于这条“及格线”的明星，评论区都是这样的画风：<br>50万？<br>50万还好意思买热搜？<br>这么少吗？拍了这么多戏。<br>和咖位不太相符吧！</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61017,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://loli.by/wp-content/uploads/2021/07/YZ8R4FE1JI33WHY3FTW-2-1024x670.png" alt="" class="wp-image-61017"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br>不仅如此，那些默默在第一时间捐了款，但没有公开发声的明星和企业，已经在遭受网友的讨伐、唾骂了，<strong>因为，不发声就等于没有捐。</strong><br>这场关于明星捐款的“内卷”，丝毫没有停下来的意思。<br>10万保底，100万为界，上不封顶，捐款行为俨然发展成了一场明星公益KPI大赛。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>原本是捐款救灾，但在铺天盖地的转账截图中，灾难反而退居二线了……</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61018,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://loli.by/wp-content/uploads/2021/07/2IDQ3LW3NI4VP4I9BDN-1024x131.png" alt="" class="wp-image-61018"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4><br><strong>“捐款内卷”的背后，是被封上神坛的“道德”</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><br>《觉醒年代》中有这样一句台词：<br><strong>“道德是用来律己的，不是用来责人的；道德是用来躬行实践的，不是在嘴里空喊的。”</strong><br>生活中，有太多人习惯打着道德的名号要求别人奉献。<br>2009年就投身于慈善事业的古天乐，前段时间被推上了舆论的风口浪尖，只因某网友曝出，有几所古天乐捐赠的小学已经荒废。<br>随即，网友的口诛笔伐接踵而来，“假慈善，真虚伪”“盲目建校，表面功夫”“做个公益恨不得全世界都知道”。<br>然而，废弃的原因当地人早有解释：<br>随着社会的发展，当地很多年轻人选择了去城市就业，孩子也跟着父母入城读书了，村里生源渐渐不足，再加上附近又新建了条件更好的学校，所以就没什么人了。<br>这些声音让我不禁想起，去年，古天乐花了5000万给自己的妈妈买了一艘游艇做生日礼物时，也被网友指责：<strong>“这么有钱，怎么不去建学校！”</strong><br>原本是一个充满孝心的举动，却成为了网友绑架他的绳索。<strong>“你是好人呀，你怎么能这么花钱呢？”</strong><br>就因为花钱给妈妈买了游艇作为生日礼物，古天乐就被网友质疑“善意不够纯粹”。<br>其实，“建校达人”古天乐从来都没有停止过做公益，去年就有人晒出他捐建的第133所教学楼竣工的视频，只是这些都发生在网友们看不到的地方。<br>2020年，虽然电影行业受到疫情影响一度陷入困境，但这一年，他仍然捐建了6所学校。<br>发表类似上述言论的网友，就是典型的用圣人的标准要求别人。<br><strong>好人做好事就应该不留名、不露锋芒，不求回报……</strong><br>正如《奇葩说》中梁秋阳所说：<br>好人一定不能及时行乐，好人一定不能贪图名利，好人必须纯粹，好人必须高尚，好人必须悲壮……<br>你把道德封上了高高的神坛，代价是什么？是没有第二个人会愿意再走上去。<br>道德标准不断被拔高，只会让更多普通人无法触及。我们总是热衷于欣赏好人牺牲，却并不希望自己成为牺牲的那个。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>所以，换位思考一下，<strong>举手之劳、尽力而为，应该是好人的谦词，而不是他人进行道德绑架的说辞。</strong> 不要拿你的尺子丈量别人的生活。天地很大，活法很多，自己的尺子就定义自己吧。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61019,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://loli.by/wp-content/uploads/2021/07/R_1986NCA3BFGCPWO7-1024x131.png" alt="" class="wp-image-61019"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4><br><strong>好人成佛，要经历“九九八十一难”</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><br>还记得10年前的小悦悦事件吗？<br>2岁的小悦悦，在巷子里被车碾压了3次，令人心痛的是，肇事车主一走了之，<strong>旁边陆续经过了18个路人，但都视而不见。</strong><br>直到拾荒阿姨陈贤妹路过，才上前施以援手。她急忙把孩子抱了起来，不会讲普通话，也不会叫救护车的她，只能抱着孩子去一家家店铺求助，才将小悦悦顺利送往医院。<br>但遗憾的是，小悦悦在抢救了8天后，还是离世了。<br>小悦悦的父母一见到阿姨，就给她磕头，阿姨也被评为当年的“良心人物”，她去医院看病，也会因为救人的善举被免去费用。<br>阿姨一出名，各式各样的评价就来了。同村的村民看她拿到了很多现金奖励，便眼红了，认定她救人是为了出名。<br>找上门来借钱的人一个接一个，阿姨一旦拒绝，就会被冷言讽刺：<strong>“都说你有100万，找你借个几万块而已，是不是怕我还不起？”</strong><br>对好人的苛求，只会让他们寒了心，日渐沉默。<br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61020,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://loli.by/wp-content/uploads/2021/07/24J3OU_BYE0VSJ8HCPN.jpg" alt="" class="wp-image-61020"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br>《芳华》中有一句台词：<strong>“当英雄，最难的是必须一辈子在神坛上，不然就随时准备接受凌迟。”</strong><br>当好人何尝不是？<br>从你成为好人的那天起，就意味着你必须背上他人强加给你的道德枷锁，必须比别人承受更多磨难。<br><strong>“坏人可以吃香喝辣，好人必须吃糠咽菜；坏人得到人民币，好人得到大奖状……”</strong><br>做个好人没有错，错的是周围人的过度审视，他们拿着有色放大镜审视你，一旦找到一点瑕疵，就会跳起来大骂被辜负。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61021,"sizeSlug":"large","linkDestination":"none"} -->
+<figure class="wp-block-image size-large"><img src="https://loli.by/wp-content/uploads/2021/07/TO_A5J36LWVTM8J91GYH-1024x131.png" alt="" class="wp-image-61021"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4><br><strong>世道变坏，从道德绑架开始</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><br>电视剧《二十不惑》当中，姜小果是一名初入职场的大四实习生，在深圳这样的大城市，交通费、伙食费都是一笔不小的支出。姜小果刚踏入社会，实习工资只能勉强维持生活。<br>家庭条件不算很好的她，一部手机从高二用到了大四也舍不得换，直到这部手机彻底坏掉，她才决定换一部新手机，可东拼西凑还差300块钱。<br>正当她无计可施时，听说曾经向她借了300块钱的贫困生王薇最近拿到了4000块钱的奖学金，于是，她鼓起勇气“要债”。<br>可当她向王薇提这件事的时候，王薇却开始装傻充愣：“啊，我以为我已经还了呢！这次的钱我都用来准备面试了。”<br>4000块钱就买了一件西装外套和一双高跟鞋？姜小果信不过，气不打一处来，语气加重：“看你这架势，是不打算还我钱了？”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61022,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://loli.by/wp-content/uploads/2021/07/HTQS6IRUK9C74QN.jpg" alt="" class="wp-image-61022"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br><br>旁边越来越多不明真相的同学凑过来围观，王薇开始带着哭腔说：“就为了300块钱，你有必要这样羞辱我吗？”<br><strong>旁边的同学随即附和道：“才300块钱，至于吗？”</strong><br>最后的结果就是，姜小果成了别人口中“为了自己的虚荣心逼迫贫困女同学”的坏人。她甚至还遭到了网络暴力：“你能不能善良点？”“太自私了，咄咄逼人的样子真难看。”<br>不知道从什么时候开始，“我弱我有理”变成一种惯用逻辑，“示弱”也成为了道德绑架他人的通行证。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>道德绑架，无异于私刑。<br>我有能力，可以支持你300块钱，但不代表我有义务白给你300块钱。<br>生活中，类似这种以圣人的标准要求别人，以无赖的标准来要求自己的事情，常有发生。<br>前几年还看到一个新闻。<br>开着宝马车的黄女士，被一个快递员的三轮车撞了。由于当时快递员边玩手机边骑三轮车，所以交警判定快递员负主要责任。<br>经检查，修理费大概要13000块钱，交警介入协商之后，黄女士也考虑到快递员年纪比较小，而且能力有限，所以只要求他承担4000块钱。<br>但约定的时间已经过去了，黄女士打电话催促快递小哥赔付修车费，得到的回复竟然是：“<strong>你那么有钱，又不差这一点钱，为什么一定要我赔？</strong>”<br></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":61023,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="https://loli.by/wp-content/uploads/2021/07/2YG4UH52UWC85MDJW4F.jpg" alt="" class="wp-image-61023"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p><br>有钱是“原罪”吗？<br>在利益面前，我们追求平等，在责任面前，却避而不谈平等，这何其荒谬。<br>尼采曾提出过“弱者的道德”，指的就是弱者为了掩盖自己对强者的嫉妒和自私，利用“弱”去达到自己的目的。<br>用自己的“弱”来消费别人的善良，一味地向身边人索取，终有一天，<strong>你靠弱势占到的所有便宜，都会成倍地还回去。</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image -->
+<figure class="wp-block-image"><img alt=""/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4><br><strong>写在最后</strong></h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p><br>别再要求善良的人必须完美无瑕，也别理所当然地享受别人的善意，因为善良一旦消耗殆尽，没有人能保全自己。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>对好人少一点道德绑架吧，“善有善报”才是社会形成良性循环的开始。<br>正如梁秋阳所说：<br>“好人过得不好，有审美上的价值；<strong>好人过得好，才有社会效益。”</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>作者：樛木。时间的老伙计，讲述时间的自媒体人。来源：MBA智库（ID：mbalib）——管理者专业学习成长平台，兼具热点与干货，顶尖管理知识、进阶职场指南。APP、头条号、微博@MBA智库。</p></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+        </div>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="uppercase tracking-[0.25em]">STATUS</span>
+          <span class="text-emerald-400 text-[10px]">OK</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：7454</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="uppercase tracking-[0.25em] mb-2">NAV</div>
+        <a href="https://lcylym.github.io/blog/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://lcylym.github.io/blog/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://lcylym.github.io/blog/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://lcylym.github.io/blog/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">STATUS:</span>
+          <span class="text-emerald-400 font-bold">ONLINE</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
