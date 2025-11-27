@@ -3,8 +3,17 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="生🐟Blog" />
+    <meta name="theme-color" content="#050505" />
     <title>[电影]罗小黑战记 - 生🐟Blog</title>
     <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <link rel="apple-touch-icon" href="https://loli.by/favicon.ico" />
+    <link rel="manifest" href="https://loli.by/manifest.webmanifest" />
     <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -108,6 +117,13 @@
       </div>
     </div>
     <div class="scanline"></div>
+    <!-- 安装 App 提醒条（PWA beforeinstallprompt） -->
+    <div id="app-install-bar" class="hidden fixed bottom-10 right-3 z-40 bg-black/90 border border-amber-500/60 px-3 py-2 text-[11px] text-amber-100 flex items-center gap-2 shadow-lg">
+      <span class="hidden sm:inline">检测到本博客支持「安装到桌面」，要安装 App 版吗？</span>
+      <span class="sm:hidden">安装 App 版本？</span>
+      <button id="app-install-btn" class="px-2 py-0.5 bg-emerald-500 text-black text-[11px] font-bold hover:bg-emerald-400">安装</button>
+      <button id="app-install-close" class="px-1 text-[11px] text-amber-300 hover:text-white">稍后</button>
+    </div>
     <!-- 顶部控制台风格导航条 -->
     <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
       <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
@@ -165,8 +181,8 @@
         </header>
         
           <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95" id="protected-wrapper"
-               data-cipher="oyyiDzvaE7M/svmIaACVxZfszQnYhm6dbmVdcJx7e7iox1t4C4TFoX4Ik7EMru/feX+remQJRiRiySag75gAHTnqKnJvnMeePfI1LBpV/GeoMMec6VhjsS2ZlUpn/O6Pyt+W1eeIC7AL2PXl/WexqgJ2DV0cE9/88+zrJ4Gi4VKRnFzUgCwJjqrmOZDuQUDtlh+WRxMsDJ+h7AMI/ftIz7nrGOkpn/Qn4c4SQ885SkPQmE+uZhSlMZffoa3vGl//pKV0M7/wcs7qvWYgcobY0IIhQcYNTXp+CgIQCPNnVV0S2bvJM3SnK5MCTnEvn/rI6ZBopV/L4QnhALew6WXBE2rgyg+Suor5R8cu12xBcmUzMHs5iZLOPqht0LwdKRncGeKazBeFfWBNHDnWpy5WKQQ9x953veDqrTKKfXxnud4Z2GM5H2bjNsgAqRyhLxos3xZcT7crfCm8qfwNGV77c3sE+YaAzLEYNhIAOYHICBAHtmVtAJL4RM6jCtjwr+Wo1EI48LOZzdFDCn6txBkaxIbbu0E6ssMw+/cX+pahbeMh+5nv/tSMjfOTVHJm0zB5pOxPvbjStysUR8am6Bo8lpL7a7F0VRjXnof1teWitJ77HqQjpFiMCoc13rnBCb/Z3Tj/YbVP7QK/CccAr2Sh5lG/sR6wyaFA7TU+4u0X7kYnTlQdygOt9ZEO8Ze18a+MbA4UwhaxQ8ylrasGIq8rDH0beM7M8Bxb4izZNnXdTK+WobIRVAZyp5FnSABP6A3MpaGYdIHT5Mp5YGA4ugbJKD43tlYzUKq/7SI5MJmiBOMCYci+LXkkxVrDaB3E87G2nzYc8xj+jp4svop0Idu8OLu7gkLUK3apALKc3GOuE3kyijAZlr7wrQ64FyMi6X8noGS2vJlnoJMSHnJlj8L1c96unMuy4M5yCse06M1Fjs62T+Ki/MdPDlojkH+UZ3FsMxLs/jYTHN8="
-               data-iv="3kGEGUNApdYKUI+F"
+               data-cipher="MZOkkID9e0yzXTHJYTbHWt1k16NKFFKRYgO+5xAeCbhqk2e+TL+pyL3W6Rm+C7wbj5/eceOD1yWeDclx25C7aO9Htvl3BkUMUOBFh+4CGzwlrwl1ZMDOUfDBqII57MP3LRrgEHP3JZlhjjsA8LkGulylz0rLxWcES+DUxfnmzYW3si59h5qlckW8sJyxYxBswUfZk0YzDF1oCXwsoWGw26af8bqcDSxkFcLJ0LpX6eV9X2H7TM3psXLaIlZt8F+cBZCswNuY3hEBSE0HnM7uNERH4d/885nRGhhuACRz4IO5qbOHlqiY51zLZxSNVXKlOeLnRZL10skl2UazTxPP3QXo7r6IOIARLPHE6pdyMsMMJUIv8sl8wQzL3cAgNmIlogrOXJ8dHdn3gXdgtm8Kk4XDtEXv9F5Eky0NutRBu6TkxmitWhZ9J4kQJ8WraPaPAFoy+OcNuAqIHrPFNtOGvtDTPCnKo5Be97/fk/ZjMzGo7krX/ESOSuQyaWDIjY/Bxqw2M2fToVGhO1SAn/JMb/qbuKK8zVoqAGXrPVfwiHgI9s4YEQmist3M1Nqhn3fdbnJzLW9He/9kSQxgBClWpu4emF3I3Sk0LYNur61GWCFxggDjtWn5cJ2XYYlUNKz6yduZ36wteEskg2AY11wy9MzLzNXhsRoYy9jqeWtQma3PCUpyhvPJumysQC1+rrC9lBR2F8c2L0CMtT46Lkv1WpJmefvatazvZmF/oexDrOUrtbKtQIPOR7bygXv8uEu10diY9PleLQ615K6Qw+jP9JvfrarM/77GktDDBAp0IkFW09+TqxNNbTRJM3aFNa8gfbYxutRn3Ut2RH0058aoTgFxlR9LPO3axIHyC4QvkoXgj5+P9uzh+AP0uXV29Oc+01hO0ffZqw/lGtV+SbDa30FmPeudYqJFWXQ8j/VgyT+SMfj1JGBFyPw+aRTD2QOSzuBJqyQj/54="
+               data-iv="hOxd7sehStQJnEKh"
                data-images='{}'>
             <div class="border border-amber-500/60 bg-black/60 p-3 text-[13px]">
               <div class="text-xs text-amber-300/80 mb-2">此文章已加密，请输入访问密码：</div>
@@ -422,6 +438,42 @@
         });
       }, { threshold: 0.1 });
       document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+      // 注册 Service Worker 用于 PWA / 安装 App
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function (e) {
+          console.warn('[sw] register failed', e);
+        });
+      }
+
+      // 安装 App 提醒逻辑（Chrome 等支持 beforeinstallprompt 的浏览器）
+      (function () {
+        let deferredPrompt = null;
+        const bar = document.getElementById('app-install-bar');
+        const btnInstall = document.getElementById('app-install-btn');
+        const btnClose = document.getElementById('app-install-close');
+        if (!bar) return;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferredPrompt = e;
+          bar.classList.remove('hidden');
+        });
+
+        btnInstall && btnInstall.addEventListener('click', async function () {
+          if (!deferredPrompt) return;
+          bar.classList.add('hidden');
+          try {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+          } catch (e) {}
+          deferredPrompt = null;
+        });
+
+        btnClose && btnClose.addEventListener('click', function () {
+          bar.classList.add('hidden');
+        });
+      })();
     </script>
   </body>
 </html>
