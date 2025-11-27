@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>超级喜欢的画师 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">超级喜欢的画师</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2020-05-12 10:09</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/my-project/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">个人项目</a>
+                
+              
+            
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95" id="protected-wrapper"
+               data-cipher="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"
+               data-iv="0k0ugSvUeMKhZTF9"
+               data-images='{}'>
+            <div class="border border-amber-500/60 bg-black/60 p-3 text-[13px]">
+              <div class="text-xs text-amber-300/80 mb-2">此文章已加密，请输入访问密码：</div>
+              <div class="flex flex-wrap gap-2 items-center">
+                <input type="password" id="post-password" class="bg-black border border-amber-500/60 px-2 py-1 flex-1 min-w-[140px]" placeholder="输入密码" />
+                <button id="unlock-btn" class="px-3 py-1 text-xs bg-amber-400 text-black font-bold hover:bg-amber-300">解锁内容</button>
+              </div>
+              <div id="unlock-msg" class="mt-2 text-[11px] text-red-300 hidden">密码错误，请重试。</div>
+            </div>
+            <div id="protected-content" class="mt-4 prose prose-invert max-w-none hidden"></div>
+          </div>
+        
+        
+
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id=""
+                      data-category=""
+                      data-category-id=""
+                      data-mapping="pathname"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：0</div>
+          <div>类型：post</div>
+          <div>状态：private</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.11.0/build/sha256.min.js"></script>
+    <script>
+      (function() {
+        const wrapper = document.getElementById('protected-wrapper');
+        if (!wrapper || !window.crypto || !window.crypto.subtle || !window.sha256) return;
+        const cipher = wrapper.getAttribute('data-cipher') || '';
+        const iv = wrapper.getAttribute('data-iv') || '';
+        const imagesJson = wrapper.getAttribute('data-images') || '{}';
+        let imagesMeta = {};
+        try { imagesMeta = JSON.parse(imagesJson); } catch (e) { imagesMeta = {}; }
+
+        const input = document.getElementById('post-password');
+        const btn = document.getElementById('unlock-btn');
+        const msg = document.getElementById('unlock-msg');
+        const contentEl = document.getElementById('protected-content');
+
+        function base64ToBytes(b64) {
+          const bin = atob(b64);
+          const len = bin.length;
+          const bytes = new Uint8Array(len);
+          for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+          return bytes;
+        }
+
+        async function deriveKey(password) {
+          const hashHex = sha256(password);
+          const bytes = new Uint8Array(hashHex.length / 2);
+          for (let i = 0; i < bytes.length; i++) {
+            bytes[i] = parseInt(hashHex.substr(i * 2, 2), 16);
+          }
+          return crypto.subtle.importKey('raw', bytes, { name: 'AES-GCM' }, false, ['decrypt']);
+        }
+
+        async function decryptAesGcm(key, ivB64, dataB64) {
+          const ivBytes = base64ToBytes(ivB64);
+          const dataBytes = base64ToBytes(dataB64);
+          const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: ivBytes }, key, dataBytes);
+          return new Uint8Array(plainBuf);
+        }
+
+        async function tryUnlock() {
+          msg.classList.add('hidden');
+          contentEl.classList.add('hidden');
+          if (!input.value) return;
+          try {
+            const key = await deriveKey(input.value);
+            const htmlBytes = await decryptAesGcm(key, iv, cipher);
+            const decoder = new TextDecoder();
+            const html = decoder.decode(htmlBytes);
+            contentEl.innerHTML = html;
+
+            // 解密图片
+            const entries = Object.entries(imagesMeta || {});
+            for (const [src, meta] of entries) {
+              if (!meta || !meta.data || !meta.iv) continue;
+              try {
+                const imgBytes = await decryptAesGcm(key, meta.iv, meta.data);
+                const blob = new Blob([imgBytes], { type: meta.mime || 'image/jpeg' });
+                const url = URL.createObjectURL(blob);
+                contentEl.querySelectorAll('img[src="' + src + '"]').forEach(function (img) {
+                  img.src = url;
+                });
+              } catch (e) {
+                // 单个图片失败忽略
+              }
+            }
+
+            contentEl.classList.remove('hidden');
+          } catch (e) {
+            msg.textContent = '密码错误或解密失败，请重试。';
+            msg.classList.remove('hidden');
+          }
+        }
+
+        btn.addEventListener('click', function(e) { e.preventDefault(); tryUnlock(); });
+        input.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); tryUnlock(); } });
+      })();
+    </script>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

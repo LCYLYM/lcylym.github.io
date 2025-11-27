@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>“网红”教授罗翔：我身上有太多不配有的光环 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">“网红”教授罗翔：我身上有太多不配有的光环</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2021-01-01 00:00</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/share/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">文章-音乐-视频</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/sharea/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">好文分享</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/中国/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#中国</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/老师/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#老师</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/娱乐/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#娱乐</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/网站/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#网站</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:paragraph -->
+<p>[toc]</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":66276,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/img/u_225222910_3938659396fm_253fmt_autoapp_138f_JPEG.jpg" alt="" class="wp-image-66276"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>我身上有太多不配有的光环</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　口述/罗翔 整理/周群峰</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我小时候并不是一个好孩子，偷喝酒、偷东西的事儿都干过。直到现在，我都感觉我是一个很普通的人，做过一些很普通的事情。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我内心深处也有些幽暗的成分，只是因为同时存在一些保守的成分，所以不至于酿成大祸。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　高中时，有一次和同学喝酒，我一口气就把一大扎啤酒干了，居然都没喝死。当时我在六楼，楼下有个同学喊我，我喝醉了，要直接跳下去。要不是后面有个同学紧紧抱住了我，我可能那时就摔死了。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　因为我知道自己从来不是一个好孩子，所以更加认为，人是需要家长和老师的管教、也是需要道德和法律约束的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　我只是一名普通老师，</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　算不上什么“小王子”</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　高考时，父母给我填报了法律专业，我当时都不知道什么叫“法律”。1995年，我来北京读大学，这也是我第一次来京。很多人会说我有讲课天赋。其实，我小时候结巴，特别害怕在别人面前说话。刚来京时，我的普通话说得很不好，经常遭人嘲笑。有同学还故意经常逗我，一逗，我就更加结巴。所以，我那时还是有点小自卑的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　1999年，我还在读研究生期间，曾给自考生讲课。讲课的目的是为赚钱养活自己，这个目的一点也不伟大。从那时起，我基本上就不用父母给生活费了。那时，所有的法学门类，我几乎都讲过，甚至还跨专业讲过市场营销学。市场营销班的学生，全是北京的孩子。他们说听不懂我的普通话，我心想怎么会呢？我感觉特标准啊。后来上课时，我就把每一句话、每一个案例，都写在黑板上，写成逐字稿，甚至连“下课了”三个字也写出来。就这样，我讲课时按照稿子念，就不紧张了。语言也是相互融合的，讲得多了，自然就熟悉了。我现在说话不结巴了，普通话也好了一些。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　2005年，从北大法学院博士毕业后，我成为中国政法大学刑法学教师。三年后，我入选中国政法大学“最受本科生欢迎的十位教师”。这是我校学生层面评出的奖项，评选结果公布那天，恰好是我31岁生日，这个荣誉也成为学生们送给我最好的生日礼物。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　同学们之所以愿意听我的课，也许是因为我把一些枯燥晦涩的法律条例，结合一些曲折离奇的案例和个性化的语言，讲得尽量通俗吧。法学，尤其是刑法学，是非常严肃的。如果通过趣味性引导的方式，能够让人感兴趣，那也未尝不可。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　有人问我，为什么那么多人愿意学习刑法？是因为凶杀、暴力、色情的内容吸引眼球吗？也许有这个因素，但这绝非关键性的原因。如果把人类的知识比作一棵大树，刑法不过是这棵大树中一根极小分杈中的枝条。但这根枝条依然有对普遍真理的追求，正是这种对真理的追求拨动了人们的心弦。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我现在带的研究生或本科生，很多都是 95后、98后甚至是00后。身为老师，回到学生中，我总感觉自己不会暮气沉沉。不知何时，学生们叫我“刑法小王子”。关于这个昵称的由来，我并不清楚，也许是讲课风格受到欢迎，也可能与我给同学们推荐过《小王子》这本书有关。我推荐此书，是想帮助他们学会如何去经营一份友谊、感情。我只是一名普通老师，算不上什么“小王子”。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我给学生们写留言时，喜欢写“希望你成为法治之光”。他们是中国法治未来的中坚力量，如果他们能够成为法治之光，就能够照亮周围的人，也照亮他们自己。这个留言，其实也是写给我的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我对学生们也没有过多的要求，希望他们努力做到追求公平正义，不畏强者，怜悯弱者，当然，也希望他们不要过得过于清贫。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　每个人内心都有幽暗面，</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　每个人心里都隐藏着一个“张三”</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我经常反思我的不够勇敢、自恋和偏见，也反思“法律技术主义”。自我反思也成为我对学生的告诫。讲完案例后，我经常会提醒他们，学习法律时千万不要陷入技术主义，法律永远不会超过社会常识的限制，法律人千万不能有傲慢之心，这种傲慢不过是不学无术的表现。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　法律要追求公平和正义，刑法更是如此，如果没有对客观真理的持守，法律必然沦为一种工具，技术主义的法学思维就可以为任何结论提供精致的论证，同时也以所谓的专业意见拒绝民众一切的意见与质疑。这正如我在《刑法学讲义》的扉页上写过的一句话：“用良知驾驭我们之所学 而不因所学蒙蔽了良知。”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　很多人提到我的名字，会与法考联系在一起。我还在读博期间，就开始做法考培训老师。2014年曾想放弃，一是觉得太累，另一方面也是因为学术圈中有人认为，作为高校教师，从事法考培训有些不务正业。后来我之所以坚持下来，是因为有朋友说，觉得这个事情是有意义的，可以影响到更多的人。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　2020年3月9日，一家视频网站邀请我入驻，并把我讲授刑法课时的一些视频“搬”上这家网站，没想到，两天之后就涨粉到百万，很快就有了上千万粉丝。此前，这家网站对我来说是陌生的，以前从未接触过。我不太懂得拒绝别人，也觉得这是一个普通的事情，也从来没想过要火。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　这些视频中我讲的那些段子，有的来自于刑法学界常年累积起来的经典案例，这些案例几乎在每一个法学院的课堂中都会被教授；有的是我从书中看来的；有的是我对一些案例进行了一些特殊的加工而成；还有的就是我在上课过程中，突然出现了一时的灵感，脑洞大开说出来的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　视频中的“张三”，是我为了方便讲述案情而虚构的反派人物，因作恶多端，而被粉丝称为“法外狂徒”。其实，每个人内心都有幽暗面，每个人心里都隐藏着一个“张三”。所以，日光之下，别无新事。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　这些看似幽默的案例，其背后凸显的更多也是人性的幽暗，这些人性的幽暗会让我们能够审视自己的内心。其次，法律制度也在每个个案中不断地趋于完善，有些个案可能折射出当时法律制度的不完善之处。那么当我们能够体悟到法律制度的不完善时，便是朝向制度完善而迈出的重要一步。最后，能认识到这个社会过去曾存在部分的乱象，才会让我们更多地渴望光明，也许这就是幽默的力量。幽默是让人能够探究其背后你想嘲讽和批判的那些东西，然后让它们变得更加美好。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　真正的知识就是要打动普通人的心。在授课的过程中，我一直追求可以在严肃性和趣味性之间寻找一种平衡。太严肃会曲高和寡，太庸俗又是娱乐消遣知识，所以需要寻找一种合乎中道的分寸感。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我有时候也会刷自己的小视频，甚至也能刷一个小时。我有时觉得自己真无聊，怎么刷自己的视频还能刷这么久？课堂之外，我在生活中其实是一个“挺闷的”人，跟身边的人也不怎么讲段子。我平日没有什么别的爱好，也就是看看书、喝喝茶。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　虚荣是有代价的</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　一夜爆红，让我感觉很神奇，甚至有种不真实感。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　现在，我的一举一动可能会被放大。有些朋友提醒我要更加低调，有些师长也会提醒我该干吗干吗，他们主要是让我更加注意做好本分工作。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　成为所谓的“网红”，也不是我所追求的。一个人成为网红，就像飘向空中的气球，飘得太高，会担心爆掉，所以我时刻提醒自己，要把自己拉回来。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　去年9月8日，因发了一篇微博，我遭遇了网络暴力。那天我确实是很烦，就索性退出了微博，后来有人说我太玻璃心了，我想想也对。第二天出差途中，我居然在火车上碰到了一个久未谋面的好朋友。我向他倾诉自己的遭遇时，他问我，“之前别人对你那么多赞誉，你觉得合适吗？”我说，“那肯定愧不敢当。”他又问，“那你高兴吗？”我说，“还挺高兴的。”</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　他反问我：“别人对你的表扬名不副实，你就很开心。对你的批评名不副实，你就很沮丧。这不是典型的双标吗？本质上，过分的夸奖与过分的批评不都是误解吗？误解本来就是人生常态，不要只喜欢好听的误解，而厌恶不好听的误解。”他的这一段话，让我瞬间释然。人生中很多事情都事与愿违，我们太有限了，我们只能做我们认为对的事情，然后接受这种事与愿违。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　人要影响别人，首先要改变自己。如果不想自我改变，却想影响别人，就会成为戴着面具的演员。人生本来就生活在各种误解中，自己先要接纳自己，凡事别把自己看得太重要，也别看得太卑微，这是最重要的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　大象是客观存在的，它并非人类的假设，虽然我们只能摸着它的一部分，但无数摸象的人也许能够尽量拼凑出象的整体。因此，永远不要在自己看重的立场上附着不加边际的价值，要接受对立观点的合理性。专业人士也必须俯下身段，倾听民众朴素的智慧。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　微博事件，对我也是一个很好的提醒，说明虚荣是有代价的。有句话就是写给我的——“荣誉是有限的，只有德行才是永恒”。人要真正意识到自己的本性，无论是被人高看、接纳的时候，还是被人看不起的时候，我知道我其实都只是一个平凡的老师。人既不高看自己，也不低看自己，凡事尽好自己本分就好。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　去年，大约是教师节之后的一个夜晚，我和几个朋友聚餐。饭后我陪一个朋友站在路边打车，有个学生认出我，便过来向我要签名，接着又有几个学生过来围住我，我给他们一一都签了。结束后，我朋友问我：“罗翔，你现在是不是很享受这种虚荣啊？”朋友的这个问题，让我有些羞愧，随后我觉得他问得有道理。所谓成名之后，我有时觉得自己变得言行不一，有时口口声声要抵制虚荣，却也会不自觉地沉浸其中。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　有时候，走在大街上被人认出并被追逐，也不过是因为我讲授的知识，增强了大家追求公平正义的信心。在无数个引发舆论热议的公共事件中，我们除了愤怒，更得坚信世上是存在正义的。所谓“正义”，如同一个用任何仪器都无法画出的，但客观存在的完美圆圈。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　每个人心目中的“理想人”，也类似这种圆圈，我们每个人在追求画得更圆的同时，也不能随意去批评别人画得不够圆，因为我们自己画得也不太圆。这种完美的圆圈难以画出，却客观存在。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　人真正的卓越，</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p><strong>　　在于知道自己是个普通人</strong></p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　当一个人突然有了知名度和影响力，如何做到不让这种名气被滥用，不被内心那种蠢蠢欲动的幽暗所释放，也是我时刻需要去警惕的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　苏格拉底说，承认自己的无知乃是开启智慧的大门。作为一名刑法学老师，我与其他专业朋友的交流中，时常会暴露自己的浅薄和愚蠢，以及虚伪与虚荣。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我本身就是一个很普通的人，普通人有的毛病我都会有。我现在在很多方面仍然不成熟，不知道以后会怎么样。人总是对明天有很多的期待和恐惧，而期待与恐惧叠加后，会导致忘记今天该做的事情。对我而言，不能把心思寄托在明天上，我只想做好每一天该做的事情，能够对抗自己的平庸，不会让自己碌碌无为。这样就可能会在平凡中，感受到一丝伟大。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　当年，我也像今天的年轻人一样，面临着像阿克顿勋爵说的四大挑战：对极度权力的渴望，对贫富不均的憎恶，对人间天堂乌托邦的向往，以及将自由和放纵混为一谈。而在今天高度信息化的大环境中，我们获取知识的渠道比过去多太多了，人也因此变得越来越虚无。因此，我们就更需要有一种定见，在不确定性中，寻找出一种相对确定的东西。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　2020年，对我是一个很意外、也很魔幻的年份，我没有想过会突然处于聚光灯下，这也让我诚惶诚恐。我要时常提醒自己，很多人看重我，并非因为我这个人，而只是看重我所传授的那些来自先贤大师们的智慧，赞誉属于他们，我不过是一个二道贩子。我所得到的一切荣光皆非我所配，很多荣光不过草船借箭，众人将本来不属于我的荣誉投射于我，我就阴差阳错地顶上了太多不配有的光环而已。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　人真正的卓越，在于知道自己是个普通人。就像“榜样”二字，都有“木”字旁，而木头是会腐烂的，所以没有谁是真正意义上的伟大，没有谁永远会成为别人的榜样。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我所谓的“光环”，终有褪色之时，我会从容接受这种现实。我现在比以前要忙碌许多，所以在新的一年中，我希望要尽力做一些减法，把很多聚光灯下的事情减掉，拿出更多时间去教学、读书、思考。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　我的外公也是一名教师，从小对后辈管教严格。在他身上，我看到了中国传统知识分子的影子。他是一个有着朴素正义感的人，曾差点被打成右派。临终前，他在病榻上留下一纸遗书，开始的一句话就是“后辈子孙当自卑视己，切勿狂妄自大”。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　外公已去，其言犹存，我终生难忘。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>　　(受访者系中国政法大学刑事司法学院教授，中国政法大学刑事司法学院刑法学研究所所长)[转自中国新闻周刊]</p>
+<!-- /wp:paragraph -->
+          </div>
+        
+        
+
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id=""
+                      data-category=""
+                      data-category-id=""
+                      data-mapping="pathname"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：7967</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

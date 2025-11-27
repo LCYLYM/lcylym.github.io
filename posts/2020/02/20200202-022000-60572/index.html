@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>萝莉控的宣言 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">萝莉控的宣言</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2020-02-02 02:20</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/article/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">所有文章</a>
+                
+              
+            
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:paragraph -->
+<p>(这么会有这么hentai的宣言，不是博主发的)</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>托尔斯泰：萝莉不是因为美丽才可爱，而是因为可爱才美丽。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>屠格涅夫：先相信自己，然后萝莉才会相信你。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>哥白尼：人的天职在于勇敢探索萝莉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>爱迪生：萝莉控，就是99%的hentai，加上1%的真爱。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>爱因斯坦：控萝莉比推倒萝莉更重要。推倒萝莉只是从生理上满足自私，而控萝莉则是需要审美和追求，这也标志着科学的真正进步。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>托尔斯泰：萝莉控不是一种享乐，而是一种沉重的存在。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>培根：萝莉就是力量。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>钢铁是怎样炼成的：人最宝贵的东西是生命，生命对人来说只有一次。因此，人的一生应当这样度过:当一个人回首往事时,不因没追求御姐而悔恨,也不因喜欢幼女而羞愧;这样,在他临死的时候,能够说,我把整个生命和全部精力都献给了人生最宝贵的事业——为萝莉的解放而奋斗。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>罗曼罗兰：萝莉最沉重的负担不是*部，而是双马尾。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>牛顿：如果我比别人看得更远的话，那是因为我有萝莉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>雨果：萝莉，是人们必须的。什么也不控的人是不会幸福的。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>爱因斯坦：一个萝莉控的价值，不应该看他得到了什么，而一个看他为萝莉贡献了什么。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>谚语：一天一个萝莉，不用请医生。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>达尔文：物竞天择，萝莉生存。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>高尔基：萝莉是人类进步的阶梯。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>海明威：人可以被消灭，不可以没萝莉！</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>孔子:三人行必有萝莉，择其萌者而控之。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>老子：萌可萌，非常萌。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>孙子：萝莉，国之大事，不可不察也。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>孟子：正太不如御姐，御姐不如萝莉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>卡缪儿：要对生活的每个萝莉都充满感动。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>汉光武帝：有萝莉，事竟成。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>谚云：万般皆下品，唯有萝莉好。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>居礼夫人：弱者等待萝莉，强者创造萝莉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>爱迪生：萝莉能增进快乐，减少痛苦。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>颜之推：积财千万，不如萝莉在身。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>西谚云：伟人的后面必定有一位伟大的萝莉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>元首:反对萝莉的,都是德意志的敌人!</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>李白：天生萝莉必有用，萝莉千金买不来。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>杜甫：会当凌绝顶，一览众萝莉。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>白居易：同是天涯萝莉控，相逢何必曾相识？</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>韩愈：世有幼女，然后有萝莉。幼女常有而萝莉不常有。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>范仲淹：先萝莉之忧而忧，后萝莉之乐而乐。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>欧阳修：萝莉控之心不在酒，在乎萝莉之间也，萝莉之萌，得之心而愚之酒也。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>马致远：幼女易得，萝莉难求。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>孙中山: 推倒萝莉尚未成功 萝莉控们仍需努力。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>鲁迅：其实地上本没有萝莉控，喜欢的人多了，也便成了萝莉控。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>转自&nbsp;<a href="https://wwww.lvmoo.com/685.love" rel="noreferrer noopener" target="_blank">凯の秘密基地</a></p></blockquote>
+<!-- /wp:quote -->
+          </div>
+        
+        
+
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id=""
+                      data-category=""
+                      data-category-id=""
+                      data-mapping="pathname"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：3164</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
