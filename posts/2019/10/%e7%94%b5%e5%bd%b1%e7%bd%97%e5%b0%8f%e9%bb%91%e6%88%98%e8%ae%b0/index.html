@@ -124,8 +124,8 @@
         </header>
         
           <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95" id="protected-wrapper"
-               data-cipher="UUmdS1Nj4rF7osGUd9UKtnXJXfze/VH04Yb0l3AuVVsTjb4TZ1FKWy5GQINlFS2QtSlnwYJ15+Smij/Ya7LRl75Vi0aQsJVngnfaYs6d+Z3mQwH12fo6zpvcPTlpap2iqCeU13fj2nFOj1m+cI/a3bghO4m1owW6wpqL5x9XAUdfTnSad/6rwjk0++9wKRmMiGKhONJdPTE5G4LUlTm128F8JlBBw/xKl7Uov8U1HfgFRZx68ECul6v1knzSz3mREPyZloVOmbCrPqIZsx0mfVRKWj99H6+xPrx6kSnZkiSAm7dDRyP8MLYSKKSHlUdc37ZSwyFQ8zY+PS0omUG6QX9xrqHxD3TxO4+2SBULG+3kx43kBu6SBmdBVoNTmUfJQbNeq8vfjItCd6q7aCM1vkZ+MJI7pTyBvXz32i+TlpnqxaMV1p7ENK1l0nUVuuAxG7BbLIm4oRzBqkmAMBPRLvrxgqf+wT0jI8incLWbu525CmDuo0sloaLZVLsRcuho7AsMd+eooIMN49fw55Q4b7LA23HpZX9aovH7QHTze460KdXttY3depO11P3C7nRDLKxdp5Jti49W4H9Rl8CbTGLSDr9OgjCgaiq5iPfvhb8OI5cal8L5+5my7gsraXy7ANLruJBtIGwpLA+6pwiWj8TEGK9zBHVk4ab9RPsq1VkOHmbxLUIHVaWgm+UULtgBqvaOYwpTLpXLq+UqjoJ9JTYFe364qXOtMDNjxeIkvgDkV/0BR6Ci0QDZCv8DJcQbnxPbQJHRjvwZtLUNqe+soYAxFi0cnRZMFdzEXI1tGYXZEajBLHCYpAqIjhD3UsKDu+39qj25d02OZfO80+mUflzB4rxcKHTbzRHdE2Z3Xwdl+EeGbH95/PyAEG/cRMXwRHImNePAu/eaHw2Vm9Fl1f2D27TTLO86+MTyZ7qv3TGmf2SACqxDw8VwD10sk3QW+2WkpSDyOzs="
-               data-iv="lWB+UKVvAN8gejnD"
+               data-cipher="qPuTEg6CtjDh3jz4WbLW9M1pGs8RPqM4i2b6qN7PdIdFLSj5+uQeDqW9uyVaVcOg0YsWufAMDGNwV9CktQx6ORz8HILcpLZvBgUijri9dIBR4lU3+a2SDzDdJDgK8bwqV90Xi4NH8hQSMQXoMmBjjGr9sHJd7jCYqMMpTk9gZWAs43LDuL7fJJA51Kdzw5RwmwAtr204UZVTrgG/VE05+b+l3Oz26PPxdTW04IArldlSRTjAr1UH4UvQMO17aDzIb6HzdwMf9WeelSkTotVUFNCebpGzsbb63vgagKfGnKKRwwsraayOQfTGDG7R14wNcR6cM4McFdN5o0uFzPoc42DQnXAa4vWLbKuGl8XGEgNZ7irTse/CReNCwrOAAJd4zTc+N2FYqB/G7a3pnI9lQRV8mkkqIngpO4K/6n1/4nnvjU4b6fBQ8Zv175Fl+Jpa95ulEseCdecselxOz2raB4PwMRcL3oWhY3TenuooWoJG75kN8UeBKlv7+Av6Ah3PSe7tubX9e9yNUNtIGXqYvIK51Z2iBxUFi+3lRgO8AoNyMdZQ0Osx3glWNnwNlB94Uup3+zpNhMteeipRsCB3+vgv3ofv3SJTSZoWecF+cMF8oe4xf7s/AjJjEnVUWUaBWW5f3lf1IyRek9lncYzNx/bmDFzWHR2odH/fVWFUEDUZOhULcZQwsvvNmnpiTicVHAEYdLqNHZokFBeTM4F8uby1m5h++SQdhA8Fu9OtClwE5JP2kzwHxjP3RL9uKpf+w4HZpOV7YhQMtSaiSN2XHjbrQeTzEKd03qai6J9NmvS/udsP0Z0B/Pjj2AsoCywBbtyfP+TcID4X/c3oW3OVBpIfws2o+eSSAl3kq6OHwg4x3Sgo0G/x0j2G7EkRlcRRsqdG4r6j9lmgFzq5MltxaDkAg3i0XMj9rjoK7nu6/g/IK1BMSw6ldaUNLrMAaopJuQmL0/3cpKo="
+               data-iv="6MArTSabQVna6Nv+"
                data-images='{}'>
             <div class="border border-amber-500/60 bg-black/60 p-3 text-[13px]">
               <div class="text-xs text-amber-300/80 mb-2">此文章已加密，请输入访问密码：</div>
@@ -325,11 +325,25 @@
       
     </footer>
     <script>
-      // 页面加载动画
-      window.addEventListener('load', function() {
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
         const loader = document.getElementById('page-loader');
-        if (loader) loader.style.display = 'none';
-      });
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
       // 滚动渐显
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {

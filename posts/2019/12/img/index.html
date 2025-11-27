@@ -218,11 +218,25 @@
       
     </footer>
     <script>
-      // 页面加载动画
-      window.addEventListener('load', function() {
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
         const loader = document.getElementById('page-loader');
-        if (loader) loader.style.display = 'none';
-      });
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
       // 滚动渐显
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {

@@ -142,8 +142,8 @@
         </header>
         
           <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95" id="protected-wrapper"
-               data-cipher="FruOW9g/No0Obm0Wi8z5TKOVPvWPEDYyZ3C/DM6XyScuUJhjs6qEgyNG6lHxWf2bG22gDvIUsQpaVS55BfPlIad9Flp0eBMa0KHRfoCXmSIxIGX2cxyfRxaH7VRTzkLb2s/Uw48pWFNYXKjBVbDR3VpMIe2e9HUW3LwGoQzgJImNG2k0jKfx4j4pNpVvbGkwjuzmCz0Z0O1UhSu3mAbXdXnXk82LEtKtjhcTCgn4Ltzbb3JlpIGeKWWVzILcD8AMrLUAEUdQDhw75e3i9nNoiu6wOSzRcLs86xp4ch7+N89Vwgs2bBGJyqz05W1PZXGt1ZqSDhqv8C6Bjq+j4CZp49p8ZhsVN4T5b5U7I3q6tnXJhvTPCzt2KFih11gaWhFDEfruZLFXHLra6K6dhXUhboGCdGyYKmZbhL81goEBNR/J2qO0Q8WBdLSErcsW87bxxK1NbYDv7xCO7fyj2vcBnnGgliqyG3+Dcw=="
-               data-iv="ee1a9Zk+J6gJjb7x"
+               data-cipher="i/EEYImQ6CAx+h0zmZ2VkAoGn8BzC7gXKrlsUddIRNKc76JxgS5+UZFag86TLi0BjSUrwRrAS/Vi8La2s2vCF6XrdqHXzGdk33wJRCIvgghpJxVCaMbDV7gPAb9G9KJB1lPIsvya4SKz85gAEQienffDsD9Ip6p6Nl9m0VU/x3AR3NQ+iC79A1/nolh4tyGZgiUGZ4ueZ0mTPuK0jyIj58qWjKCemOZ95xYwoJrhKaIbo9f9SDU0sQMzSsUnCyMWM3SYPERWvkF3Niwf0DzWgz48KiocqJjChoFvfSm13aGqem80FT4iFYyv58AyF1rIZkjWBVVbCFiAf6DWOU62EfZg9JmymselL5KFHmpM0I2kRCtP24O0CmVxvQaIB8HPMk8RNa10Flzyk5toI9QRIBoO9829OSpj4b+uuemn/IpX0xTgpfKUKdHeq7hTrTWCN+/zt06KyaZZlPdWqddy5sVLGaFBg72umA=="
+               data-iv="2nkGz3O9zb3wZq/e"
                data-images='{}'>
             <div class="border border-amber-500/60 bg-black/60 p-3 text-[13px]">
               <div class="text-xs text-amber-300/80 mb-2">此文章已加密，请输入访问密码：</div>
@@ -280,11 +280,25 @@
       
     </footer>
     <script>
-      // 页面加载动画
-      window.addEventListener('load', function() {
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
         const loader = document.getElementById('page-loader');
-        if (loader) loader.style.display = 'none';
-      });
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
       // 滚动渐显
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(e => {
