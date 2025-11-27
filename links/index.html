@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>友情链接 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <h2>友情链接</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 mt-2">
+    
+      <a href="https://moe.best/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://moe.best/usr/img/avatar1.png" alt="神代綺凜の萌化小基地" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">神代綺凜の萌化小基地</div>
+          
+            <div class="text-[11px] opacity-80">ななひら天下第一！</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://rbq.ai/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://cdn.v2ex.com/gravatar/38264c163d8e5d835cbd41649cec25b4" alt="RBQ.AI" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">RBQ.AI</div>
+          
+            <div class="text-[11px] opacity-80">一个人工智障的绒布球RBQ</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://freeerror.org/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://zhzy.pro/wp-content/uploads/2019/02/touxiang.png" alt="FreeError Community" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">FreeError Community</div>
+          
+            <div class="text-[11px] opacity-80">论坛致力于分享错误[free]，解决错误[error]</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.moerats.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.moerats.com/usr/picture/rats.png" alt="Rat&amp;#039;s Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Rat&amp;#039;s Blog</div>
+          
+            <div class="text-[11px] opacity-80">~技术大佬~</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.owow.cc" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://tc-pic.oss-cn-shanghai.aliyuncs.com/img/head.jpeg" alt="TurboHsuの博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">TurboHsuの博客</div>
+          
+            <div class="text-[11px] opacity-80">嘤嘤怪</div>
+          
+        </div>
+      </a>
+    
+      <a href="http://blog.skillcat.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.skillcat.me/favction.ico" alt="Kitten&amp;#039;s Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Kitten&amp;#039;s Blog</div>
+          
+            <div class="text-[11px] opacity-80">一只走在前端与设计不归路上的技术宅</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://90wish.ru/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://secure.gravatar.com/avatar/ab2662cfc5c79ae753685c812cb884af?s=220&amp;amp;r=X&amp;amp;d=mm" alt="losquare&amp;#039;s Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">losquare&amp;#039;s Blog</div>
+          
+            <div class="text-[11px] opacity-80">一个爱好折腾的学生</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.94ish.me/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.94ish.me/img/my.jpg" alt="千影" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">千影</div>
+          
+            <div class="text-[11px] opacity-80">沉迷技术的二次元死宅</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.gtloli.net/?fromuid=563390" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.gtloli.app/H/images/resource/1.gif" alt="哥特动漫社" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">哥特动漫社</div>
+          
+            <div class="text-[11px] opacity-80">~一个超多资源的社区~</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.onyi.net/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://ws9.54loli.cn/headportrait.jpg" alt="忆梦小站" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">忆梦小站</div>
+          
+            <div class="text-[11px] opacity-80">一个可爱又有些较真的忠实原创维护者~</div>
+          
+        </div>
+      </a>
+    
+      <a href="http://www.51xijiayi.com/#/signup/?tid75344&amp;#038;" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <div class="w-10 h-10 rounded-full border border-amber-500/60 flex items-center justify-center text-[10px] text-amber-200/80">免费</div>
+        
+        <div class="text-sm">
+          <div class="font-semibold">免费获得steam游戏的平台</div>
+          
+            <div class="text-[11px] opacity-80">免费获得steam游戏可以抽中大作</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.nutssss.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://blog.nutssss.cn/wp-content/uploads/2018/06/QQ%E5%9B%BE%E7%89%8720180624205150.jpg" alt="Nutssss的博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Nutssss的博客</div>
+          
+            <div class="text-[11px] opacity-80">一个爱好钻研技术的学生党博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://yueer.moe" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://yueer.moe/logo.png" alt="Yue’s Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Yue’s Blog</div>
+          
+            <div class="text-[11px] opacity-80">Yueer_一个彻头彻尾的笨蛋</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://2heng.xin/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://view.moezx.cc/images/2018/03/27/avatar.jpg" alt="Mashiro" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Mashiro</div>
+          
+            <div class="text-[11px] opacity-80">樱花庄的白猫</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://chengpengzhao.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://chengpengzhao.com/medias/avatar.jpg" alt="CpZhao" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">CpZhao</div>
+          
+            <div class="text-[11px] opacity-80">一个流体力学专业的菜鸡</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://luoshuijs.vip/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://luoshuijs.vip/wp-content/uploads/2019/05/20190526220926.jpg" alt="洛水.山岭居室的博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">洛水.山岭居室的博客</div>
+          
+            <div class="text-[11px] opacity-80">高中晚期党/一个调皮的PV师一只，准备2020年高考(￣▽￣)~*喜欢各种瞎折腾，自己看起来是个大佬其实是个渣渣的学渣〒▽〒</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://moedog.org/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://cdn.jsdelivr.net/gh/Moe-dog/prprpr.love@0.6/statics/img/head.png" alt="犬&amp;#039; BLOG" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">犬&amp;#039; BLOG</div>
+          
+            <div class="text-[11px] opacity-80">萌物/ 变态loli控 /宅</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://idc.moe/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.idc.moe/moegirl.jpg" alt="IDC萌站" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">IDC萌站</div>
+          
+            <div class="text-[11px] opacity-80">洛樱博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://52huameng.com/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://52huameng.com/logo.jpg" alt="华梦博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">华梦博客</div>
+          
+            <div class="text-[11px] opacity-80">一名热爱ACGN文化的高中Coder</div>
+          
+        </div>
+      </a>
+    
+      <a href="http://rbq.lu/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://q1.qlogo.cn/g?b=qq&amp;amp;nk=2777025738&amp;amp;s=640" alt="xiaobai0&amp;#039;s blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">xiaobai0&amp;#039;s blog</div>
+          
+            <div class="text-[11px] opacity-80">又一只绒布球</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.smilingblog.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.smilingblog.cn/wp-content/uploads/2019/06/1560685810-6.143-300x300.jpg" alt="彩虹Smiling的Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">彩虹Smiling的Blog</div>
+          
+            <div class="text-[11px] opacity-80">本人高中学生，现居天津</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://zhebk.cn" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://q.qlogo.cn/g?b=qq&amp;amp;nk=945203919&amp;amp;s=160" alt="纸盒博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">纸盒博客</div>
+          
+            <div class="text-[11px] opacity-80">我们，渺小到不可一世</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.hqsblog.cn" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q1.qlogo.cn/g?b=qq&amp;amp;nk=1797752637&amp;amp;s=100" alt="寒穹の小屋" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">寒穹の小屋</div>
+          
+            <div class="text-[11px] opacity-80">愿陪你枯骨成双，作别这场曲散人凉</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://moe.blog/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://q.qlogo.cn/g?b=qq&amp;amp;s=100&amp;amp;nk=137915199" alt="萌娜" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">萌娜</div>
+          
+            <div class="text-[11px] opacity-80">!!萌国大佬!!</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.2wxk.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q.qlogo.cn/headimg_dl?dst_uin=3102126552&amp;amp;spec=640" alt="小卡博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">小卡博客</div>
+          
+            <div class="text-[11px] opacity-80">黑梦免费空间站长</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://ipayy.net" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://img.ipayy.net/2020/02/02/77a94bc95ab44.jpg" alt="苏安的小窝" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">苏安的小窝</div>
+          
+            <div class="text-[11px] opacity-80">性感苏安，在线陪玩。</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.conoha.vip" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://secure.gravatar.com/avatar/e6518256a7b49e678393e34186aa7e13?s=64&amp;amp;r=X&amp;amp;d=" alt="一只鹅の窝" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">一只鹅の窝</div>
+          
+            <div class="text-[11px] opacity-80">喜欢萌妹の (的) 变态鹅</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://tech.zyaire.top" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://tech.zyaire.top/pics/head.jpeg" alt="Zyaire的兴趣博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Zyaire的兴趣博客</div>
+          
+            <div class="text-[11px] opacity-80">记录我的兴趣爱好，和掌握的技能，欢迎做客…</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.hei.cat/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://q2.qlogo.cn/headimg_dl?dst_uin=954277715&amp;amp;spec=100" alt="黑猫博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">黑猫博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://aoppp.com/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://aoppp.com/author/qian-tang-jiang-shang-chao-xin-lai-jin-ri-fang-zhi-wo-shi-wo/" alt="憧憬blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">憧憬blog</div>
+          
+            <div class="text-[11px] opacity-80">专注互联网产品开发</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.jiajunboke.com/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=1945000000&amp;amp;spec=100" alt="嘉骏博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">嘉骏博客</div>
+          
+            <div class="text-[11px] opacity-80">嘉骏博客是一个专注于分享网上赚钱心得、网赚项目,创业资讯的网站博客,简约无广告无垃圾,值得收藏!</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://biux.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <div class="w-10 h-10 rounded-full border border-amber-500/60 flex items-center justify-center text-[10px] text-amber-200/80">猫咪</div>
+        
+        <div class="text-sm">
+          <div class="font-semibold">猫咪Blog</div>
+          
+            <div class="text-[11px] opacity-80">一个什么都不会的辣鸡博主</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.podipod.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.podipod.com/wp-content/uploads/2019/05/2019050122502867.jpg" alt="podipod软库网" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">podipod软库网</div>
+          
+            <div class="text-[11px] opacity-80">podipod软库网专注全国计算机等级考试练习题库软件架构及开发</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://5ipk.cn" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q1.qlogo.cn/g?b=qq&amp;amp;nk=2279119754&amp;amp;s=100" alt="以诺书博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">以诺书博客</div>
+          
+            <div class="text-[11px] opacity-80">以诺书的个人沙雕博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://taidayu.ltd/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://cn.gravatar.com/avatar/7e38146d832bb488e9c91c8f53bd110c?s=64&amp;amp;d=wavatar&amp;amp;r=g" alt="太大鱼" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">太大鱼</div>
+          
+            <div class="text-[11px] opacity-80">一个死咸鱼的网站</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://mugmn.com/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://q1.qlogo.cn/g?b=qq&amp;amp;nk=3166386743&amp;amp;s=640" alt="咕沐鸟博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">咕沐鸟博客</div>
+          
+            <div class="text-[11px] opacity-80">啄木鸟的博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="http://blog.qcmoe.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q1.qlogo.cn/g?b=qq&amp;amp;nk=1171182898&amp;amp;s=100" alt="倾丞博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">倾丞博客</div>
+          
+            <div class="text-[11px] opacity-80">技术资源分享交流博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.ovoweb.cn" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q1.qlogo.cn/g?b=qq&amp;amp;nk=1492031442&amp;amp;s=100" alt="独白博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">独白博客</div>
+          
+            <div class="text-[11px] opacity-80">网赚博客，技术教程，优质资源教程分享博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://idealclover.top" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://image.idealclover.cn/blog/assets/icon.png" alt="idealclover" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">idealclover</div>
+          
+            <div class="text-[11px] opacity-80">翠翠的个人网站！</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://kotori.love/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://loli.by/wp-content/uploads/2020/04/T2V956Y4W1MFYU.png" alt="あかねぞら" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">あかねぞら</div>
+          
+            <div class="text-[11px] opacity-80">茜空大佬的博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://renwole.com/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://renwole.com/wp-content/uploads/2017/04/cropped-Renwole-logo-192×192-192×192.png" alt="任我乐" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">任我乐</div>
+          
+            <div class="text-[11px] opacity-80">一条迷茫的死咸鱼。</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.x-lf.com/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://i-cdn.akass.cn/2022/06/62aee0a30cda3.png" alt="凌中的锋雨" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">凌中的锋雨</div>
+          
+            <div class="text-[11px] opacity-80">只为在茫茫人海中有自己的一片天空~</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://i.loli.by/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://loli.by/wp-content/uploads/2020/05/logosetu.png" alt="⎛⎝LYM&amp;#039;S PHOTO⎠⎞" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">⎛⎝LYM&amp;#039;S PHOTO⎠⎞</div>
+          
+            <div class="text-[11px] opacity-80">⎛⎝个人的小图站⎠⎞</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.kewu.cc" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://misaka91.coding.net/p/cdn/d/cdn/git/raw/master/fwtQSds7mgWFENK.jpg" alt="匿名 Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">匿名 Blog</div>
+          
+            <div class="text-[11px] opacity-80">一个辣鸡的博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.kazami.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://loli.by/wp-content/uploads/2020/05/yjn.jpg" alt="Never be apart" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Never be apart</div>
+          
+            <div class="text-[11px] opacity-80">人生如梦弹指间，莫负豆蔻但相恋</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://wjy.me" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://q1.qlogo.cn/g?b=qq&amp;amp;nk=1104195224&amp;amp;s=0" alt="Dreamy.WJY" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Dreamy.WJY</div>
+          
+            <div class="text-[11px] opacity-80">一条有着远大理想的咸鱼</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.ni-co.moe" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://loli.by/wp-content/uploads/2020/06/DBA3HOH8_2A364S9Y77.jpg" alt="矢澤にこ" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">矢澤にこ</div>
+          
+            <div class="text-[11px] opacity-80">shirakun</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://moetuan.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://cdn.jsdelivr.net/gh/huxx16/a@3.1.1/fantino.png" alt="王友元的博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">王友元的博客</div>
+          
+            <div class="text-[11px] opacity-80">炼铜达人奖得主</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://tg.loli.by/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://loli.by/wp-content/uploads/2020/06/QR1RJ9L2F4GCBMQ2.png" alt="TG" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">TG</div>
+          
+            <div class="text-[11px] opacity-80">博客TG频道</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.caixiaojing.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="http://q2.qlogo.cn/headimg_dl?dst_uin=2913434936&amp;amp;spec=100" alt="Blokura" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Blokura</div>
+          
+            <div class="text-[11px] opacity-80">一位热爱二次元的咸鱼学生</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://aprilforest.cn" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://res.aprilforest.cn/avatar/avatar.jpg" alt="夜街尘" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">夜街尘</div>
+          
+            <div class="text-[11px] opacity-80">眨眼间，已是千年之外</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://nekodeng.oschina.io/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://nekodeng.oschina.io/medias/logo.png" alt="itsNeko" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">itsNeko</div>
+          
+            <div class="text-[11px] opacity-80">AKA十万伏特皮卡丘</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.chia2.com" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://blog.chia2.com/favicon.ico" alt="Chia2’S Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Chia2’S Blog</div>
+          
+            <div class="text-[11px] opacity-80">一个菜鸡的小破站</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.2w2.top" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://cdn.jsdelivr.net/gh/zerotide/zeroidea@master/china/images/24.png" alt="紗夕里" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">紗夕里</div>
+          
+            <div class="text-[11px] opacity-80">在你心里-直到永远</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.yozk.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://www.yozk.cn/Sugar/favicon.png" alt="糖茶砌站" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">糖茶砌站</div>
+          
+            <div class="text-[11px] opacity-80">专注于资源分享的综合分享平台</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://n2ys.xyz/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <div class="w-10 h-10 rounded-full border border-amber-500/60 flex items-center justify-center text-[10px] text-amber-200/80">应发</div>
+        
+        <div class="text-sm">
+          <div class="font-semibold">应发者</div>
+          
+            <div class="text-[11px] opacity-80">发现有趣实用新软件</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.im.ci" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://blog.im.ci/wp-content/uploads/2020/07/IMG_20191231_052259-scaled-e1596127234331.jpg" alt="Rain&amp;#039;s Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Rain&amp;#039;s Blog</div>
+          
+            <div class="text-[11px] opacity-80">Rain的随笔小记</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://irr.ink" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://irr.ink/logo.jpg" alt="不可方思" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">不可方思</div>
+          
+            <div class="text-[11px] opacity-80">Like tears in rain.</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.794td.me" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://blog.794td.me/img/index_r.jpg" alt="Mr.Y的小屋" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Mr.Y的小屋</div>
+          
+            <div class="text-[11px] opacity-80">欢迎来到Mr.Y的小屋</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.wututu.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://file-up.beaa.cn/image/1.jpg" alt="wututu-blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">wututu-blog</div>
+          
+            <div class="text-[11px] opacity-80">wututu的博客,各种干货分享的博客</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://vtransit.cn" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://vtransit.cn/img/tx.d9062cef.png" alt="Origin" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">Origin</div>
+          
+            <div class="text-[11px] opacity-80">好好生活，慢慢相遇</div>
+          
+        </div>
+      </a>
+    
+      <a href="http://rbq.youki.work/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://p.pstatp.com/origin/pgc-image/9b9e68274dfc41cc8748e9c3383434e9" alt="萌·优纪的博客" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">萌·优纪的博客</div>
+          
+            <div class="text-[11px] opacity-80">youki·一位热爱技术的咸鱼少女</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://controlnet.space/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://controlnet.space/images/avatar.jpg" alt="ControlNet Blog" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">ControlNet Blog</div>
+          
+            <div class="text-[11px] opacity-80">永远13岁~</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://www.rssins.net/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://cdn.jsdelivr.net/gh/RSSYLY/redsunsetpic@mull/pic/blog/2021/1621731809290.jpg" alt="余晖无垠" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">余晖无垠</div>
+          
+            <div class="text-[11px] opacity-80">余晖无垠研究所</div>
+          
+        </div>
+      </a>
+    
+      <a href="https://blog.orangii.cn/" target="_blank" rel="nofollow" class="border border-amber-500/60 bg-black/70 amber-border p-3 flex gap-3 items-center hover:bg-amber-400 hover:text-black transition-colors">
+        
+          <img src="https://static.orangii.cn/avatar/avatar.png!compress" alt="一只橙梓一个窝" class="w-10 h-10 rounded-full object-cover border border-amber-500/60" />
+        
+        <div class="text-sm">
+          <div class="font-semibold">一只橙梓一个窝</div>
+          
+            <div class="text-[11px] opacity-80">可能会长出二叉树？</div>
+          
+        </div>
+      </a>
+    
+  </div>
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        if (loader) loader.style.display = 'none';
+      });
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>

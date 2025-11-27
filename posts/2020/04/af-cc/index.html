@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>[AF-CC]linux集群CC攻击源码[cc攻击][免费][Centos7] - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">[AF-CC]linux集群CC攻击源码[cc攻击][免费][Centos7]</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2020-04-14 09:54</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/technology/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">技术-脚本-软件</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/教程/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#教程</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/免费/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#免费</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:heading {"level":4} -->
+<h4>五分钟安装教程</h4>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>1.安装条件&nbsp; 本程序分为主控和被控,主控安装仅需要支持php且可以访问的空间/服务器/虚拟主机即可!,主控仅需上传3个文件就可以完成安装 主控最低硬件配置:随便,能运行php就行被控需要Centos7系统且有独立公网ip(ipv6未经测试不确定支持,不支持nat云/共享ip云)的云服务器/vps/cvm/ecs/服务器(暂不支持其他但您可以自行尝试或修改安装源码),我们提供了一键安装指令,您只需要输入指令其他什么都不需要即可完成安装 被控最低硬件配置:建议至少1核512Mb以上(但实际上并没用任何关系) 温馨提示:华为腾讯阿里百度京东云以及有安全组的云请提前开放10086端口!&nbsp;本程序除了接口程序外,全部开源!全部免费!<br>安装被控请注意一下,如果你的这台服务器是装了宝塔/amh/kangle等面板可以不影响原有服务的情况下直接使用,直接安装,无需全新服务器,但如果您之前就是用源码建站了,可能会冲突!</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":4} -->
+<h4>2.被控安装&nbsp;</h4>
+<!-- /wp:heading -->
+
+<!-- wp:list -->
+<ul><li>使用SSH,以root用户进入您的centos7的ssh终端,随后输入一键安装指令,五分钟完成安装在终端输入:</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>yum -y install wget &amp;&amp; wget -O wb.sh https://loli.by/file/wb.sh &amp;&amp; chmod +x wb.sh &amp;&amp; sh wb.sh</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:list -->
+<ul><li>随后输入1然后回车即可安装过程中可能系统会询问,全部选择y即可完成安装本安装程序将会在您的系统中安装caddy php7.0 webbench 不会占用太多资源(其实吧纯程序60Mb内存就可以了)请注意,当被控重启之后,程序并不会开机自启,请输入sh wb.sh 随后输入3并回车以启动程序服务!</li><li>3.主控安装&nbsp; 主控就是php程序,您只需要<a href="https://loli.by/wp-admin/cc.zip">点我下载源码</a>,然后上传到网站/虚拟主机,访问即可!主控的所有程序都为您写好了,您只需要在bk.txt文件中输入您的被控的公网ip(或域名)即可!您必须要在bk.txt中添加至少一个被控IP才可以访问主控!!!您想要使用集群进行cc攻击时,您只需要在所有的发包机/被控机按照2.被控安装安装被控程序,随后将ip写入bk.txt即可,请注意一行一个,不要留空格!不要使用Windows的记事本编辑!!!不然会出错!!!</li><li>4.其他说明&nbsp; 版权请不要删,毕竟免费开源了,很多地方可以自己修改也可以自己增加功能,甚至可以对接一些销售系统~不要用做违法内容以及^_^基于webbench基本秒杀无防的网站,但对于有防御的束手无策~请注意,被控安装的环境不要给别的程序使用,极度不安全!!!!!!</li></ul>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":4} -->
+<h4>脚本由<a href="https://5ipk.cn/" class="rank-math-link">以诺书博主</a>提供</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p></p>
+<!-- /wp:paragraph -->
+          </div>
+        
+        
+          <footer class="border-t border-amber-500/40 px-4 py-4 bg-black/80">
+            <section class="comments">
+  <h2>评论（5）</h2>
+  <article class="comment">
+    <div class="comment-meta"><a href="http://www.onyi.net" rel="nofollow">何叶</a> · 2020-07-05 13:18:52</div>
+    <p>尊敬的博主您好:
+我们检测到您的友站盗版了您的友站的文章，请尽快进行处理，否则可能影响友站关系。</p>
+    <p>我们的文章:https://www.onyi.net/archives/329.html
+抄袭者的文章:https://blog.oioweb.cn/index.php/archives/1325.html</p>
+    <p>明显可以判断对方发出文章的时间晚于我站，并且文章内容有过多重合。
+在我们进行警告后，对方不仅没有配合进行原文链接补足或下架文章，却进行了文章伪原创、洗文等一系列规避行为，撇清文章关系，甚至采用恶意的态度，出现了辱骂的情况。</p>
+    <p>该行为已侵犯了我站的著作权，麻烦贵站对该网站进行友链下架/责令下架文章，维护版权，谢谢。</p>
+    <p>如您长期未回复或持抄袭者相同态度，我们可能会取消和贵站的友链关系，且与抄袭者互做友链可能影响贵站在搜索引擎的权重。</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://loli.by/" rel="nofollow">LYM</a> · 2020-07-05 19:25:22</div>
+    <p>您好，对贵站的文章已做查看，发现教程本质上只是一个插件加速配置问题，而且本身图片和内容不尽相同，至于类似的提示无可厚非，本身就是插件使用提示和插件github地址来源，也不知道有没有使用伪原创之类，在没有充足的证据之前，不足以证明是盗版抄袭，教程出的相似是正常情况，恕不因这件不明了的事下架他人友链，如果这样影响贵站和本站的友链及关系，本站深感抱歉。</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://loli.by/" rel="nofollow">LYM</a> · 2020-07-05 19:26:25</div>
+    <p>顺带一提，纠纷之类的，就算要在博客留言提示，请在留言板留言 :lol:</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://www.onyi.net/" rel="nofollow">何叶</a> · 2020-07-05 19:40:34</div>
+    <p>博主您好:
+之所以在本版留言，是因为我们无法得知贵站的具体联系方式&amp;留言板，只有文章可以点击。
+对于您所描述的“内容不尽相同”，是因为我站已对对方进行警告后对方才进行的修改，原内容可以从搜索引擎的抓取中看到。
+并且在申诉的过程中，对方一直是无所谓乃至恶语相向。
+证据:链接：https://share.weiyun.com/FVhSnh5H 密码：z5g3wp
+我站不知道贵站对于侵权内容的判断是出于什么方式的，如果贵站认为该类站点适合建立关系，但不愿意维护与被侵站点的关系的话，我们也没用任何办法。
+教程出现该类事件如果是正常情况，那么岂不是所有人都可以互相引用盗版？倘若贵站文章被大量盗用，甚至排名比贵站高，贵站又是否默许。
+忆梦小站一向都是以支持原创为准的，也请贵站以同样的态度进行对待，感谢。</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://loli.by/" rel="nofollow">LYM</a> · 2020-07-05 20:03:44</div>
+    <p>感谢博主提供证据【主要是没证据不能随便判断】，已经进行友链下架处理，页面有缓存可能一段时间后才能更新[虽然觉得事情不至于那么严重]，至于类似抄袭行为，建议抱着学到了就行的心态，至于版权问题争论意义不大，写博文什么的，主要意义在于分享知识嘛~这些东西到是不要看得太重 :lol:  :lol:  :lol: </p>
+    <p>还有，，，，留言板在这里。。。：https://loli.by/guestbook/
+ :lol:  :lol:</p>
+  </article>
+</section>
+          </footer>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：1750</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 relative z-20">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画
+      window.addEventListener('load', function() {
+        const loader = document.getElementById('page-loader');
+        if (loader) loader.style.display = 'none';
+      });
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+    </script>
+  </body>
+</html>
