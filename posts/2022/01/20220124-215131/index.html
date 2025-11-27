@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="生🐟Blog" />
+    <meta name="theme-color" content="#050505" />
+    <title>柠檬M1阅读器[电纸书]刷机[博阅likebook]教程 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <link rel="apple-touch-icon" href="https://loli.by/favicon.ico" />
+    <link rel="manifest" href="https://loli.by/manifest.webmanifest" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 安装 App 提醒条（PWA beforeinstallprompt） -->
+    <div id="app-install-bar" class="hidden fixed bottom-10 right-3 z-40 bg-black/90 border border-amber-500/60 px-3 py-2 text-[11px] text-amber-100 flex items-center gap-2 shadow-lg">
+      <span class="hidden sm:inline">检测到本博客支持「安装到桌面」，要安装 App 版吗？</span>
+      <span class="sm:hidden">安装 App 版本？</span>
+      <button id="app-install-btn" class="px-2 py-0.5 bg-emerald-500 text-black text-[11px] font-bold hover:bg-emerald-400">安装</button>
+      <button id="app-install-close" class="px-1 text-[11px] text-amber-300 hover:text-white">稍后</button>
+    </div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">柠檬M1阅读器[电纸书]刷机[博阅likebook]教程</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2022-01-24 21:51</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/article/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">所有文章</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/technology/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">技术-脚本-软件</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/教程/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#教程</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/免费/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#免费</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/安装/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#安装</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/系统/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#系统</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/状态/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#状态</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/大佬/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#大佬</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/设置/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#设置</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/lemon-m1/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#lemon m1</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:heading {"level":4} -->
+<h4>之前一直想摸个安卓系统的电子书，就看中了这款性价比很高的设备了，约300左右，2+16G，屏幕也不错，到手原生系统自然是不能随便你折腾，但是也可以通过替换法安装第三方，不过这就有些麻烦，咱买过咸鱼的刷机系统，但用了半个月自己死机救不活了，后来偶然找到网上另一大佬的刷机方法，这里免费分享下。</h4>
+<!-- /wp:heading -->
+
+<!-- wp:image {"id":66309,"width":347,"height":472,"sizeSlug":"full","linkDestination":"none","className":"is-style-rounded"} -->
+<figure class="wp-block-image size-full is-resized is-style-rounded"><img src="/img/image-5.png" alt="" class="wp-image-66309" width="347" height="472"/><figcaption>刷机前</figcaption></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4>刷机教程</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>刷机前请先恢复出厂设置，避免以前安装的软件错乱。<strong>[其实安装后恢复出厂设置更好]</strong><br>先<strong>安装 rockchip </strong>驱动软件<br>打开文件夹 RK_Driver_Assistant_4.5_bernado_mod，运行 DriverInstall.exe，安装驱动</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":66305,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/img/image-1.png" alt="" class="wp-image-66305"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>柠檬 M1 关机，在关机状态下一直按住音量键+，然后数据线接入电脑的 USB2.0 插口。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>[<strong>注意，一定要是 USB2.0 ]</strong><br>运行 AndroidTool_Release_v2.71 文件夹中的 AndroidTool.exe<br>此时，软件最下方会显示发现一个 Loader 设备，说明此时机器已进入刷机模式，如果不是<br>按住关机键，开机后再关机，重复上述动作。<br>切换到高级功能，点击读取 Chip 信息，确认芯片型号为 PX30</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":66306,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/img/image-2.png" alt="" class="wp-image-66306"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:paragraph -->
+<p>刷入新固件<br>勾选的分区按照默认的即可(13 分区保存的序列号信息，可以不刷入)。点击执行。<br>刷入完成后重启即可。<br>刷完机后如程序错乱，进行恢复一遍出厂设置即可</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:image {"id":66307,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/img/image-3.png" alt="" class="wp-image-66307"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:image {"id":66308,"sizeSlug":"full","linkDestination":"none"} -->
+<figure class="wp-block-image size-full"><img src="/img/image-4.png" alt="" class="wp-image-66308"/></figure>
+<!-- /wp:image -->
+
+<!-- wp:heading {"level":4} -->
+<h4>刷机后</h4>
+<!-- /wp:heading -->
+
+<!-- wp:gallery {"ids":[66311,66310],"linkTo":"none"} -->
+<figure class="wp-block-gallery columns-2 is-cropped"><ul class="blocks-gallery-grid"><li class="blocks-gallery-item"><figure><img src="/img/image-7-e1643032241405.png" alt="" data-id="66311" data-full-url="/img/image-7-e1643032241405.png" data-link="https://loli.by/?attachment_id=66311" class="wp-image-66311"/></figure></li><li class="blocks-gallery-item"><figure><img src="/img/image-6.png" alt="" data-id="66310" data-full-url="/img/image-6.png" data-link="https://loli.by/?attachment_id=66310" class="wp-image-66310"/></figure></li></ul></figure>
+<!-- /wp:gallery -->
+
+<!-- wp:heading {"level":4} -->
+<h4>刷机文件链接：[刷机包+软件+驱动]</h4>
+<!-- /wp:heading -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>链接: https://pan.baidu.com/s/1etAHeOaoir6nYmJKV_nEeQ?pwd=adir 提取码: adir 复制这段内容后打开百度网盘手机App，操作更方便哦</code></pre>
+<!-- /wp:code -->
+          </div>
+        
+        
+
+        
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id="R_kgDOQeBtbg"
+                      data-category="General"
+                      data-category-id="DIC_kwDOQeBtbs4CzIBq"
+                      data-mapping="title"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：3104</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+      // 注册 Service Worker 用于 PWA / 安装 App
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function (e) {
+          console.warn('[sw] register failed', e);
+        });
+      }
+
+      // 安装 App 提醒逻辑（Chrome 等支持 beforeinstallprompt 的浏览器）
+      (function () {
+        let deferredPrompt = null;
+        const bar = document.getElementById('app-install-bar');
+        const btnInstall = document.getElementById('app-install-btn');
+        const btnClose = document.getElementById('app-install-close');
+        if (!bar) return;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferredPrompt = e;
+          bar.classList.remove('hidden');
+        });
+
+        btnInstall && btnInstall.addEventListener('click', async function () {
+          if (!deferredPrompt) return;
+          bar.classList.add('hidden');
+          try {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+          } catch (e) {}
+          deferredPrompt = null;
+        });
+
+        btnClose && btnClose.addEventListener('click', function () {
+          bar.classList.add('hidden');
+        });
+      })();
+    </script>
+  </body>
+</html>

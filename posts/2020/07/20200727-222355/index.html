@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="生🐟Blog" />
+    <meta name="theme-color" content="#050505" />
+    <title>谷歌[Google]反代 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <link rel="apple-touch-icon" href="https://loli.by/favicon.ico" />
+    <link rel="manifest" href="https://loli.by/manifest.webmanifest" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 安装 App 提醒条（PWA beforeinstallprompt） -->
+    <div id="app-install-bar" class="hidden fixed bottom-10 right-3 z-40 bg-black/90 border border-amber-500/60 px-3 py-2 text-[11px] text-amber-100 flex items-center gap-2 shadow-lg">
+      <span class="hidden sm:inline">检测到本博客支持「安装到桌面」，要安装 App 版吗？</span>
+      <span class="sm:hidden">安装 App 版本？</span>
+      <button id="app-install-btn" class="px-2 py-0.5 bg-emerald-500 text-black text-[11px] font-bold hover:bg-emerald-400">安装</button>
+      <button id="app-install-close" class="px-1 text-[11px] text-amber-300 hover:text-white">稍后</button>
+    </div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">谷歌[Google]反代</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2020-07-27 22:23</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/my-project/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">个人项目</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/technology/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">技术-脚本-软件</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/验证/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#验证</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/博客/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#博客</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/自动/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#自动</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/反代/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#反代</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/访问/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#访问</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/查看/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#查看</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/邮箱/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#邮箱</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/登入/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#登入</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/回复/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#回复</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95" id="protected-wrapper"
+               data-cipher="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"
+               data-iv="/DXtfQZJOjU7/sr+"
+               data-images='{&#34;/img/SOSGKR49Q2X@1LWV3X9.jpg&#34;: {&#34;iv&#34;: &#34;eDn5CgvqmdTbYrIf&#34;, &#34;data&#34;: &#34;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&#34;, &#34;mime&#34;: &#34;image/jpeg&#34;}}'>
+            <div class="border border-amber-500/60 bg-black/60 p-3 text-[13px]">
+              <div class="text-xs text-amber-300/80 mb-2">此文章已加密，请输入访问密码：</div>
+              <div class="flex flex-wrap gap-2 items-center">
+                <input type="password" id="post-password" class="bg-black border border-amber-500/60 px-2 py-1 flex-1 min-w-[140px]" placeholder="输入密码" />
+                <button id="unlock-btn" class="px-3 py-1 text-xs bg-amber-400 text-black font-bold hover:bg-amber-300">解锁内容</button>
+              </div>
+              <div id="unlock-msg" class="mt-2 text-[11px] text-red-300 hidden">密码错误，请重试。</div>
+            </div>
+            <div id="protected-content" class="mt-4 prose prose-invert max-w-none hidden"></div>
+          </div>
+        
+        
+          <footer class="border-t border-amber-500/40 px-4 py-4 bg-black/80">
+            <section class="comments">
+  <h2>评论（13）</h2>
+  <article class="comment">
+    <div class="comment-meta">Rinne · 2020-07-29 11:09:08</div>
+    <p>大佬, :lol: 谢谢您了 :lol: </p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://longyuan.store/" rel="nofollow">pudding233</a> · 2020-07-31 09:15:15</div>
+    <p>owo英文捉急khx</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://longyuan.store/" rel="nofollow">pudding233</a> · 2020-07-31 09:16:01</div>
+    <p>xwx为什么看不了</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://longyuan.store/" rel="nofollow">pudding233</a> · 2020-08-04 13:45:33</div>
+    <p>尝试能否看到qaq</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">likang · 2020-08-06 09:55:07</div>
+    <p>感谢您</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://isekai.cn" rel="nofollow">muzmn</a> · 2020-08-21 11:10:23</div>
+    <p>绝了</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">迷恋天空丿鱼 · 2020-09-04 22:28:45</div>
+    <p>感谢分享！！！！！！！！！！！！！！！！！！</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">迷恋天空丿鱼 · 2020-09-04 22:29:32</div>
+    <p>感谢分享</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">Yu · 2020-09-04 22:32:37</div>
+    <p>感谢楼主分享</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">Dc · 2020-09-19 10:15:16</div>
+    <p>感谢您</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">kulukulumi · 2020-09-19 10:21:18</div>
+    <p>感谢楼主分享</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">一条宙斯 · 2020-10-05 09:51:44</div>
+    <p>谢谢分享！</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta">一条宙斯 · 2020-10-05 10:08:42</div>
+    <p>回复了，打不开</p>
+  </article>
+</section>
+          </footer>
+        
+
+        
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id="R_kgDOQeBtbg"
+                      data-category="General"
+                      data-category-id="DIC_kwDOQeBtbs4CzIBq"
+                      data-mapping="title"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：0</div>
+          <div>类型：post</div>
+          <div>状态：private</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+    <script src="https://cdn.jsdelivr.net/npm/js-sha256@0.11.0/build/sha256.min.js"></script>
+    <script>
+      (function() {
+        const wrapper = document.getElementById('protected-wrapper');
+        if (!wrapper || !window.crypto || !window.crypto.subtle || !window.sha256) return;
+        const cipher = wrapper.getAttribute('data-cipher') || '';
+        const iv = wrapper.getAttribute('data-iv') || '';
+        const imagesJson = wrapper.getAttribute('data-images') || '{}';
+        let imagesMeta = {};
+        try { imagesMeta = JSON.parse(imagesJson); } catch (e) { imagesMeta = {}; }
+
+        const input = document.getElementById('post-password');
+        const btn = document.getElementById('unlock-btn');
+        const msg = document.getElementById('unlock-msg');
+        const contentEl = document.getElementById('protected-content');
+
+        function base64ToBytes(b64) {
+          const bin = atob(b64);
+          const len = bin.length;
+          const bytes = new Uint8Array(len);
+          for (let i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+          return bytes;
+        }
+
+        async function deriveKey(password) {
+          const hashHex = sha256(password);
+          const bytes = new Uint8Array(hashHex.length / 2);
+          for (let i = 0; i < bytes.length; i++) {
+            bytes[i] = parseInt(hashHex.substr(i * 2, 2), 16);
+          }
+          return crypto.subtle.importKey('raw', bytes, { name: 'AES-GCM' }, false, ['decrypt']);
+        }
+
+        async function decryptAesGcm(key, ivB64, dataB64) {
+          const ivBytes = base64ToBytes(ivB64);
+          const dataBytes = base64ToBytes(dataB64);
+          const plainBuf = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: ivBytes }, key, dataBytes);
+          return new Uint8Array(plainBuf);
+        }
+
+        async function tryUnlock() {
+          msg.classList.add('hidden');
+          contentEl.classList.add('hidden');
+          if (!input.value) return;
+          try {
+            const key = await deriveKey(input.value);
+            const htmlBytes = await decryptAesGcm(key, iv, cipher);
+            const decoder = new TextDecoder();
+            const html = decoder.decode(htmlBytes);
+            contentEl.innerHTML = html;
+
+            // 解密图片
+            const entries = Object.entries(imagesMeta || {});
+            for (const [src, meta] of entries) {
+              if (!meta || !meta.data || !meta.iv) continue;
+              try {
+                const imgBytes = await decryptAesGcm(key, meta.iv, meta.data);
+                const blob = new Blob([imgBytes], { type: meta.mime || 'image/jpeg' });
+                const url = URL.createObjectURL(blob);
+                contentEl.querySelectorAll('img[src="' + src + '"]').forEach(function (img) {
+                  img.src = url;
+                });
+              } catch (e) {
+                // 单个图片失败忽略
+              }
+            }
+
+            contentEl.classList.remove('hidden');
+          } catch (e) {
+            msg.textContent = '密码错误或解密失败，请重试。';
+            msg.classList.remove('hidden');
+          }
+        }
+
+        btn.addEventListener('click', function(e) { e.preventDefault(); tryUnlock(); });
+        input.addEventListener('keydown', function(e) { if (e.key === 'Enter') { e.preventDefault(); tryUnlock(); } });
+      })();
+    </script>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+      // 注册 Service Worker 用于 PWA / 安装 App
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function (e) {
+          console.warn('[sw] register failed', e);
+        });
+      }
+
+      // 安装 App 提醒逻辑（Chrome 等支持 beforeinstallprompt 的浏览器）
+      (function () {
+        let deferredPrompt = null;
+        const bar = document.getElementById('app-install-bar');
+        const btnInstall = document.getElementById('app-install-btn');
+        const btnClose = document.getElementById('app-install-close');
+        if (!bar) return;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferredPrompt = e;
+          bar.classList.remove('hidden');
+        });
+
+        btnInstall && btnInstall.addEventListener('click', async function () {
+          if (!deferredPrompt) return;
+          bar.classList.add('hidden');
+          try {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+          } catch (e) {}
+          deferredPrompt = null;
+        });
+
+        btnClose && btnClose.addEventListener('click', function () {
+          bar.classList.add('hidden');
+        });
+      })();
+    </script>
+  </body>
+</html>

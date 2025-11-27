@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="生🐟Blog" />
+    <meta name="theme-color" content="#050505" />
+    <title>虚拟主机和虚拟服务器有什么区别？ - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <link rel="apple-touch-icon" href="https://loli.by/favicon.ico" />
+    <link rel="manifest" href="https://loli.by/manifest.webmanifest" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 安装 App 提醒条（PWA beforeinstallprompt） -->
+    <div id="app-install-bar" class="hidden fixed bottom-10 right-3 z-40 bg-black/90 border border-amber-500/60 px-3 py-2 text-[11px] text-amber-100 flex items-center gap-2 shadow-lg">
+      <span class="hidden sm:inline">检测到本博客支持「安装到桌面」，要安装 App 版吗？</span>
+      <span class="sm:hidden">安装 App 版本？</span>
+      <button id="app-install-btn" class="px-2 py-0.5 bg-emerald-500 text-black text-[11px] font-bold hover:bg-emerald-400">安装</button>
+      <button id="app-install-close" class="px-1 text-[11px] text-amber-300 hover:text-white">稍后</button>
+    </div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">虚拟主机和虚拟服务器有什么区别？</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2021-05-15 17:45</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/question/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">那些奇奇怪怪的问题</a>
+                
+              
+            
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80 ml-1">TAG</span>
+              
+                
+                
+                  <a href="https://loli.by/tags/地址/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#地址</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/系统/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#系统</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/网站/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#网站</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/虚拟主机/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#虚拟主机</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/访问/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#访问</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/tags/虚拟主机和虚拟服务器的区别/" class="px-1 py-0.5 border border-amber-500/30 text-[10px] hover:bg-amber-300 hover:text-black transition-colors">#虚拟主机和虚拟服务器的区别</a>
+                
+              
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:heading {"level":4} -->
+<h4>虚拟服务器</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>虚拟服务器是指采用特殊的软硬件技术把一台完整的服务器主机分成若干个主机。实际上是将真实的硬盘空间分成若干份，然后租给不同用户，每一台被分割的主机都具有独立的系统和IP地址，但共享真实主机的CPU、RAM、操作系统、应用软件等。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>虚拟主机</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>虚拟主机是利用虚拟技术将一台物理服务器划分成多个“虚拟”服务器。实际上是将真实的硬盘空间分成若干份，然后租给不同用户，每一台被分割的主机都具有独立的域名和IP地址，但共享真实主机的CPU、RAM、操作系统、应用软件等。虚拟主机的出现大大节省了服务器硬件的成本，所以虚拟主机租用价格比较便宜。虚拟主机的关键技术在于，即使在同一台硬件、同一个操作系统上，运行着为多个用户打开的不同的服务器程式，也互不干扰。并且每一台虚拟主机的表现和独立主机并没有什么差别。虚拟主机也有其缺点，由于是多个用户共享一台服务器，所以其访问速度及流量便受到一定的限制。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:separator -->
+<hr class="wp-block-separator"/>
+<!-- /wp:separator -->
+
+<!-- wp:paragraph -->
+<p>总的来说，虚拟主机就类似一个配备好相应的环境的搭建网站的平台[权限收到限制]。虚拟服务器就类似一台独立的虚拟机[服务器][权限大，可操作性大]。虚拟主机和云服务器都有其各自的特点，在安全和灵活性方面，云服务器要强于虚拟主机，但价格方面比虚拟主机要高。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+<h4>虚拟主机与虚拟服务器[云服务器]应该如何选择</h4>
+<!-- /wp:heading -->
+
+<!-- wp:paragraph -->
+<p>1、如果你的网站暂时不能带来利益且成本比较少，建议选择虚拟主机，因为其低廉的价格，是草根站长们的首要选择。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>2、如果你的网站对安全性要求不是很高，那么可以选择虚拟主机，因为在安全防护方面，云主机要高于虚拟主机。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>3、如果你是技术小白，可以选择虚拟主机，诸如软件配置、防病毒、防攻击等安全措施都由专业服务商提供，租用虚拟主机通常只需要几分钟的时间就可以开通，网站建设的效率非常高，用户无需具备技术能力。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:paragraph -->
+<p>4、如果你对服务器方面的预算比较高，而且也不确定网站发展的速度，那么可以选择云服务器，因为虚拟主机性能限制比较严，像流量限制、空间限制等，当网站发展到一定规模后，虚拟主机性能就会成为网站发展的障碍。而云服务器则不存在这样的问题。</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":5} -->
+<h5>虚拟主机与云服务器是两个不同类型的主机，其实无论选择哪种，只有适合网站的才是最好的。我们在选择服务器时，一定检测其访问速度与稳定性，因为其决定着网站能否正常运行以及网站的SEO优化效果。</h5>
+<!-- /wp:heading -->
+
+<!-- wp:heading {"level":5} -->
+<h5>现在大的厂商已经开始下架虚拟主机，而虚拟服务器价格也相对降低，所以折腾的话，还是虚拟服务器香。</h5>
+<!-- /wp:heading -->
+          </div>
+        
+        
+
+        
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id="R_kgDOQeBtbg"
+                      data-category="General"
+                      data-category-id="DIC_kwDOQeBtbs4CzIBq"
+                      data-mapping="title"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：1766</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+      // 注册 Service Worker 用于 PWA / 安装 App
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function (e) {
+          console.warn('[sw] register failed', e);
+        });
+      }
+
+      // 安装 App 提醒逻辑（Chrome 等支持 beforeinstallprompt 的浏览器）
+      (function () {
+        let deferredPrompt = null;
+        const bar = document.getElementById('app-install-bar');
+        const btnInstall = document.getElementById('app-install-btn');
+        const btnClose = document.getElementById('app-install-close');
+        if (!bar) return;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferredPrompt = e;
+          bar.classList.remove('hidden');
+        });
+
+        btnInstall && btnInstall.addEventListener('click', async function () {
+          if (!deferredPrompt) return;
+          bar.classList.add('hidden');
+          try {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+          } catch (e) {}
+          deferredPrompt = null;
+        });
+
+        btnClose && btnClose.addEventListener('click', function () {
+          bar.classList.add('hidden');
+        });
+      })();
+    </script>
+  </body>
+</html>

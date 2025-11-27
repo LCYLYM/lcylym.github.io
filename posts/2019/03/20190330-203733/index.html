@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="applicable-device" content="pc,mobile" />
+    <meta name="format-detection" content="telephone=no,email=no,address=no" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="生🐟Blog" />
+    <meta name="theme-color" content="#050505" />
+    <title>[Pxder] Pixiv 插画下载器 - 生🐟Blog</title>
+    <meta name="description" content="Migrated from WordPress, powered by GitHub Pages" />
+    <link rel="apple-touch-icon" href="https://loli.by/favicon.ico" />
+    <link rel="manifest" href="https://loli.by/manifest.webmanifest" />
+    <!-- Tailwind + JetBrains Mono，参考控制台风格 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+      html, body {
+        height: 100%;
+      }
+      body {
+        background-color: #050505;
+        color: #ffb000;
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .scanline {
+        background: linear-gradient(
+          to bottom,
+          rgba(255,255,255,0),
+          rgba(255,255,255,0) 50%,
+          rgba(0,0,0,0.12) 50%,
+          rgba(0,0,0,0.12)
+        );
+        background-size: 100% 4px;
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        opacity: 0.08;
+      }
+      .amber-border {
+        box-shadow: 0 0 12px rgba(255,176,0,0.18);
+      }
+      .amber-glow-text {
+        text-shadow: 0 0 4px rgba(255,176,0,0.7);
+      }
+      .cursor-block {
+        animation: blink 1.1s steps(1) infinite;
+      }
+      .fade-in-up {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      }
+      .fade-in-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      /* 轻微的背景流光效果 */
+      .bg-aurora {
+        position: fixed;
+        inset: -20%;
+        background:
+          radial-gradient(circle at 10% 20%, rgba(255,176,0,0.04), transparent 55%),
+          radial-gradient(circle at 80% 0%, rgba(0,255,200,0.06), transparent 55%),
+          radial-gradient(circle at 0% 80%, rgba(255,0,128,0.05), transparent 55%);
+        filter: blur(40px);
+        opacity: 0.6;
+        pointer-events: none;
+        z-index: -1;
+        animation: aurora-move 18s ease-in-out infinite alternate;
+      }
+      @keyframes aurora-move {
+        0%   { transform: translate3d(0,0,0) scale(1); }
+        50%  { transform: translate3d(-10px,-20px,0) scale(1.05); }
+        100% { transform: translate3d(10px,10px,0) scale(1.02); }
+      }
+      /* 链接 & 按钮的扫描高亮 */
+      .scan-hover {
+        position: relative;
+        overflow: hidden;
+      }
+      .scan-hover::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.18), transparent);
+        transform: translateX(-120%);
+        opacity: 0;
+      }
+      .scan-hover:hover::after {
+        opacity: 1;
+        transform: translateX(120%);
+        transition: transform 0.7s ease-out, opacity 0.15s ease-out;
+      }
+      @keyframes blink {
+        0%, 50% { opacity: 1; }
+        51%, 100% { opacity: 0; }
+      }
+    </style>
+    
+    
+    
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5443680016515963"
+     crossorigin="anonymous"></script>
+    
+  </head>
+  <body class="min-h-screen flex flex-col bg-black">
+    <div class="bg-aurora"></div>
+    <div id="page-loader" class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 text-amber-400 text-sm tracking-[0.3em]">
+      <div class="flex flex-col items-center gap-3">
+        <div class="w-12 h-12 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div>
+        <div>加载中 · BLOG INITIALIZING</div>
+      </div>
+    </div>
+    <div class="scanline"></div>
+    <!-- 安装 App 提醒条（PWA beforeinstallprompt） -->
+    <div id="app-install-bar" class="hidden fixed bottom-10 right-3 z-40 bg-black/90 border border-amber-500/60 px-3 py-2 text-[11px] text-amber-100 flex items-center gap-2 shadow-lg">
+      <span class="hidden sm:inline">检测到本博客支持「安装到桌面」，要安装 App 版吗？</span>
+      <span class="sm:hidden">安装 App 版本？</span>
+      <button id="app-install-btn" class="px-2 py-0.5 bg-emerald-500 text-black text-[11px] font-bold hover:bg-emerald-400">安装</button>
+      <button id="app-install-close" class="px-1 text-[11px] text-amber-300 hover:text-white">稍后</button>
+    </div>
+    <!-- 顶部控制台风格导航条 -->
+    <header class="border-b border-amber-500/70 bg-black/90 relative z-50">
+      <div class="max-w-6xl mx-auto px-3 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="bg-amber-400 text-black px-2 py-0.5 text-xs font-bold tracking-widest">博客</div>
+          <div>
+            <div class="text-sm md:text-base font-bold tracking-[0.3em] amber-glow-text">生🐟Blog</div>
+            <div class="text-[10px] text-amber-400/70 mt-0.5">Migrated from WordPress, powered by GitHub Pages</div>
+          </div>
+        </div>
+        <nav class="flex flex-wrap gap-2 text-[11px] md:text-xs items-center">
+          
+            <a href="https://loli.by/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Home</a>
+          
+            <a href="https://loli.by/archive/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Archive</a>
+          
+            <a href="https://loli.by/categories/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Categories</a>
+          
+            <a href="https://loli.by/tags/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Tags</a>
+          
+            <a href="https://loli.by/links/" class="border border-amber-500/40 px-2 py-1 hover:bg-amber-400 hover:text-black transition-colors">Links</a>
+          
+        </nav>
+      </div>
+    </header>
+
+    <!-- 主内容区：仿控制台栅格布局 -->
+    <main class="flex-1 w-full pb-20">
+      <div class="max-w-6xl mx-auto px-3 py-4">
+        
+  <div class="grid grid-cols-12 gap-3 md:gap-4">
+    <section class="col-span-12 md:col-span-9">
+      <article class="border border-amber-500/60 bg-black/80 amber-border fade-in-up visible">
+        <header class="px-3 py-2 border-b border-amber-500/60">
+          <div class="text-xs text-amber-300/80 tracking-[0.25em] uppercase mb-1">ENTRY</div>
+          <h1 class="text-lg md:text-2xl font-bold mb-1 amber-glow-text">[Pxder] Pixiv 插画下载器</h1>
+          <div class="flex flex-wrap gap-2 items-center text-[11px] text-amber-200/80">
+            <span class="px-2 py-0.5 border border-amber-500/50 bg-black/70">2019-03-30 20:37</span>
+            
+              <span class="uppercase tracking-[0.15em] text-amber-400/80">CAT</span>
+              
+                
+                
+                  <a href="https://loli.by/categories/article/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">所有文章</a>
+                
+              
+                
+                
+                  <a href="https://loli.by/categories/technology/" class="px-1.5 py-0.5 border border-amber-500/40 hover:bg-amber-400 hover:text-black transition-colors">技术-脚本-软件</a>
+                
+              
+            
+            
+          </div>
+        </header>
+        
+          <div class="px-4 py-4 md:py-5 text-sm leading-relaxed text-amber-100/95 prose prose-invert max-w-none">
+            <!-- wp:list -->
+<p></strong></p></p>
+<ul>
+
+<li><strong> 运行预览 </strong></li>
+
+</ul>
+
+<p><strong>
+<!-- /wp:list -->
+
+<figure class="wp-block-image size-large"><img src="/img/5b7aaccfb1c4a.gif" alt="" class="wp-image-2159"></figure>
+
+<!-- wp:list -->
+</strong></p>
+
+<ul>
+
+<li><strong>Linux系统运行</strong></li>
+
+</ul>
+
+<p><strong>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":4} -->
+</strong></p>
+
+<h4><strong>Ubuntu</strong></h4>
+
+<p><strong>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+</strong></p>
+
+<pre class="wp-block-preformatted"><strong>curl -sL https://deb.nodesource.com/setup_10.x | -E bash - </strong><br /><strong>apt-get install -y nodejs </strong></pre>
+
+<p><strong>
+<!-- /wp:preformatted -->
+
+<!-- wp:heading {"level":4} -->
+</strong></p>
+
+<h4><strong>Debian</strong></h4>
+
+<p><strong>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+</strong></p>
+
+<pre class="wp-block-preformatted"><strong>curl -sL https://deb.nodesource.com/setup_10.x | bash - </strong><br /><strong>apt-get install -y nodejs </strong></pre>
+
+<p><strong>
+<!-- /wp:preformatted -->
+
+<!-- wp:heading {"level":4} -->
+</strong></p>
+
+<h4><strong>Centos</strong></h4>
+
+<p><strong>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+</strong></p>
+
+<pre class="wp-block-preformatted"><strong>curl -sL https://rpm.nodesource.com/setup_10.x | bash -</strong><br /><strong>yum install nodejs -y </strong></pre>
+
+<p><strong>
+<!-- /wp:preformatted -->
+
+<!-- wp:list -->
+</strong></p>
+
+<ul>
+
+<li><strong>Windows系统运行</strong></li>
+
+</ul>
+
+<p><strong>
+<!-- /wp:list -->
+
+<!-- wp:heading {"level":4} -->
+</strong></p>
+
+<h4><strong>环境准备： Node.js </strong></h4>
+
+<p><strong>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+</strong></p>
+
+<pre class="wp-block-preformatted"><strong>打开官网 <a href="https://nodejs.org/en/">https://nodejs.org/en/</a> </strong><br /><strong>下载右边的“最新发布版” </strong><br /><strong>安装一路确定 </strong></pre>
+
+<p><strong>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+</strong></p>
+
+<h4><strong>打开“命令提示符（CMD） ”或者“Powershell”，执行下面的命令，即可安装或者更新<br />注：后续命令皆为在此执行</strong></h4>
+
+<p><strong>
+<!-- /wp:paragraph -->
+
+<!-- wp:heading {"level":4} -->
+</strong></p>
+
+<h4><strong>安装/更新</strong></h4>
+
+<p><strong>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+</strong></p>
+
+<pre class="wp-block-preformatted"><strong>npm i -g pxder</strong></pre>
+
+<p><strong>
+<!-- /wp:preformatted -->
+
+<!-- wp:heading {"level":4} -->
+</strong></p>
+
+<h4><strong>卸载</strong></h4>
+
+<p><strong>
+<!-- /wp:heading -->
+
+<!-- wp:preformatted -->
+</strong></p>
+
+<pre class="wp-block-preformatted"><strong>npm uninstall -g pxder</strong></pre>
+
+<p><strong>
+<!-- /wp:preformatted -->
+
+<!-- wp:paragraph -->
+</strong></p>
+
+<h4><strong>配置</strong></h4>
+
+<h4><strong><a id="user-content-登录" class="anchor" href="https://github.com/LCYLYM/pxder#%E7%99%BB%E5%BD%95" aria-hidden="true"></a>登录P站账号</strong></h4>
+
+<pre class="highlight highlight-source-shell"><strong>pxder --login</strong></pre>
+
+<p class="highlight highlight-source-shell"><strong>会让你输入用户名密码，登录成功一次后以后如果没有出什么bug则无需再次登录</strong><br /><br /><strong>注：pxder 仅会在计算机上储存 refreshAccessToken，而不会储存您的帐号密码</strong></p>
+
+<h4><strong>登出</strong></h4>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder --logout</strong></pre>
+
+</div>
+
+<p><strong><a id="user-content-设置" class="anchor" href="https://github.com/LCYLYM/pxder#%E8%AE%BE%E7%BD%AE" aria-hidden="true"></a>设置</strong></p>
+
+<h4><strong>进入 Pxder 的设置界面</strong></h4>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder --setting</strong></pre>
+
+</div>
+
+<pre style="padding-left: 40px;"><strong>有五项设置，按下数字键选择一项进行设置，然后按照要求输入之后回车即可</strong><br /><br /></pre>
+
+<pre style="padding-left: 40px;"><strong>[1] Download path  <span class="pl-c"># 下载目录，必须设置</span>
+
+[2] Download thread <span class="pl-c"># 下载线程数</span>
+
+[3] Download timeout    <span class="pl-c"># 下载超时</span>
+
+[4] Auto rename     <span class="pl-c"># 自动重命名（文件夹）</span>
+
+[5] Proxy       <span class="pl-c"># 使用代理</span></strong></pre>
+
+<pre style="padding-left: 40px;"><strong>下载目录</strong><br /><strong>请注意相对路径与绝对路径的区别，不过不用担心，输入完路径后会显示绝对路径以方便你检查</strong><br /><strong>目录无需手动建立，下载图片的时候会自动建立</strong></pre>
+
+<pre style="padding-left: 40px;"><strong>下载线程数</strong><br /><strong>即同时下载的图片数，默认为<code>5</code>，最小为<code>1</code>，最大为<code>32</code></strong><br /><strong>下载图片时最左侧的一列实际上就是线程编号</strong></pre>
+
+<pre style="padding-left: 40px;"><strong>下载超时及重试</strong><br /><strong>如果这么多秒之后一张图还没被下载完则算作超时，超时后会自动重试，默认值为<code>30</code></strong><br /><strong>下载图片时如果线程编号是黄色底的就代表此次是重试</strong><br /><strong>重试超过<code>10</code>次则视作下载失败</strong></pre>
+
+<pre style="padding-left: 40px;"><strong>自动重命名</strong><br /><strong>开启了以后，例如这个画师原来叫<code>abc</code>，今天你再次去下载（更新）他的画作，但是他改名叫<code>def</code>了，</strong><br /><strong>那么程序会自动帮你重命名画师文件夹</strong></pre>
+
+<pre><strong>使用代理</strong><br /><strong>支持使用 HTTP 或 SOCKS 代理，即可以使用小飞机</strong><br /><strong>输入格式为<code>&lt;协议&gt;://[用户名:密码@]&lt;IP&gt;:&lt;端口&gt;</code>，例如：</strong><br /><strong><code>    http://user:passwd@127.0.0.1:1080<br /></code><code>    socks://127.0.0.1:1080</code>（如果你使用小飞机则直接填这个，除非你改过本地端口）</strong></pre>
+
+<pre><strong>如果输入空行则关闭代理</strong></pre>
+
+<pre><strong>注：配置文件存放路径可通过命令<code>pxder --conf-loca</code>查看</strong></pre>
+
+<h4><strong>注意：</strong></h4>
+
+<h4><strong>因P站域名遭到 GFW 的 SNI 阻断，这意味着只要你在大陆内，即便你改了 Hosts 也无法直接使用 pxder，请记得使用<code>pxder --setting</code>设置代理</strong></h4>
+
+<p>&nbsp;</p>
+
+<h4><strong>运行机制&amp;特性</strong></h4>
+
+<ul>
+
+<li><strong>会将同一画师的作品下载在<code>(UID)画师名</code>格式的文件夹内，图片命名格式为<code>(PID)作品名</code></strong><br /><strong>并且，画师名会自动删除名字中<code>@</code>（包含半角&amp;全角）符号及以后的文字（因为这些基本上都是画师的摊位信息之类的与名字无关的信息）</strong></li>
+
+<li><strong>文件（夹）名均会过滤掉所有 Windows 和 Linux 中不能或不推荐做文件名的符号</strong></li>
+
+<li><strong>动图下下来会是所有帧的压缩包，并且会标注 delay 信息</strong>
+
+<ul>
+
+<li><strong>例如<code>xxx@30ms.zip</code>表示该动图的播放速度为 30ms 一帧</strong></li>
+
+<li><strong>由于获取动图信息需要额外调用API，因此如果动图较多将会使得解析时间较长</strong></li>
+
+</ul>
+
+</li>
+
+<li><strong>下载时会忽略掉已经下载完成的插画</strong></li>
+
+<li><strong>下载超时或网络错误会自动重试，重试上限为10次</strong>
+
+<ul>
+
+<li><strong>如果当某一个线程达到重试上限并且此时有不止一个下载线程处于重试状态，程序将视为暂时出现了网络问题，暂停5分钟后会继续重试</strong></li>
+
+<li><strong>如果只有一个下载线程出现错误，程序将会放弃下载该p并继续运行（因为有出现过确实是因为P站自己的问题而无法下载的例子<code>48948784_p4</code>）</strong></li>
+
+</ul>
+
+</li>
+
+<li><strong>抗GFW连接重置攻击，解析时被连接重置会自动重试</strong></li>
+
+</ul>
+
+<h4><strong>使用</strong></h4>
+
+<p><strong>如果需要终止程序，请在命令行中按下<code>Ctrl + C</code>或者直接关闭命令行窗口</strong></p>
+
+<p><strong>请不要吐槽为什么在 Windows 下<code>Ctrl + C</code>后提示的<code>终止批处理操作吗(Y/N)?</code>不管是 Y 还是 N 都依然会终止，因为 nodejs 捕捉到<code>Ctrl + C</code>就自己终止了，Windows 晚了一步（。</strong></p>
+
+<h3><strong><a id="user-content-1-下载或更新某画师的所有插画作品" class="anchor" href="https://github.com/LCYLYM/pxder#1-%E4%B8%8B%E8%BD%BD%E6%88%96%E6%9B%B4%E6%96%B0%E6%9F%90%E7%94%BB%E5%B8%88%E7%9A%84%E6%89%80%E6%9C%89%E6%8F%92%E7%94%BB%E4%BD%9C%E5%93%81" aria-hidden="true"></a>(1) 下载或更新某画师的所有插画作品</strong></h3>
+
+<p><strong>使用<code>-u</code>或<code>--uid</code>参数，后跟画师的 UID，可单个可多个，如果多个则用英文半角逗号隔开</strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pxder -u uid1，uid2，uid3，...</span></span></strong></pre>
+
+</div>
+
+<p><strong>例如</strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pxder -u 5899479,724607,11597411</span></span></strong></pre>
+
+</div>
+
+<h3><strong><a id="user-content-2-下载或更新你关注的所有画师的所有插画作品" class="anchor" href="https://github.com/LCYLYM/pxder#2-%E4%B8%8B%E8%BD%BD%E6%88%96%E6%9B%B4%E6%96%B0%E4%BD%A0%E5%85%B3%E6%B3%A8%E7%9A%84%E6%89%80%E6%9C%89%E7%94%BB%E5%B8%88%E7%9A%84%E6%89%80%E6%9C%89%E6%8F%92%E7%94%BB%E4%BD%9C%E5%93%81" aria-hidden="true"></a>(2) 下载或更新你关注的所有画师的所有插画作品</strong></h3>
+
+<p><strong>该操作同时也会更新已下载的关注画师的作品，并且效率远高于 (3)，比较推荐使用</strong></p>
+
+<p><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">会自动排除pixiv事务局(uid= </span></span><code>11</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">)</span></span></strong></p>
+
+<p><strong>由于收集关注信息需时较久，因此特地针对该功能做了信息缓存：如果你在下载中途退出，那么下次使用该功能时并不需要重新收集，而是利用上次的缓存立即继续下载。</strong></p>
+
+<ul>
+
+<li><strong>公开关注与私密关注的缓存是分开的，互不干扰</strong></li>
+
+<li><strong>如果你需要强制重新收集画师信息（忽略上次的缓存），请在运行命令时加入<code>--force</code>参数</strong></li>
+
+</ul>
+
+<h4><strong><a id="user-content-公开关注的画师" class="anchor" href="https://github.com/LCYLYM/pxder#%E5%85%AC%E5%BC%80%E5%85%B3%E6%B3%A8%E7%9A%84%E7%94%BB%E5%B8%88" aria-hidden="true"></a>公开关注的画师</strong></h4>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder -f
+
+<span class="pl-c"># 或</span>
+
+pxder --follow</strong></pre>
+
+</div>
+
+<h4><strong><a id="user-content-私密关注的画师" class="anchor" href="https://github.com/LCYLYM/pxder#%E7%A7%81%E5%AF%86%E5%85%B3%E6%B3%A8%E7%9A%84%E7%94%BB%E5%B8%88" aria-hidden="true"></a>私密关注的画师</strong></h4>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder -F
+
+<span class="pl-c"># 或</span>
+
+pxder --follow--private</strong></pre>
+
+</div>
+
+<h3><strong><a id="user-content-3-更新已下载的画师的画作" class="anchor" href="https://github.com/LCYLYM/pxder#3-%E6%9B%B4%E6%96%B0%E5%B7%B2%E4%B8%8B%E8%BD%BD%E7%9A%84%E7%94%BB%E5%B8%88%E7%9A%84%E7%94%BB%E4%BD%9C" aria-hidden="true"></a>(3) 更新已下载的画师的画作</strong></h3>
+
+<p><strong>会对下载目录中检测到的所有下载过的画师的插画进行增量更新下载</strong></p>
+
+<p><strong>与 (2) 的区别是可以更新你使用 (1) 下载了的但是未关注的画师的插画，但是效率远低于 (2)</strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder -U
+
+<span class="pl-c"># 或</span>
+
+pxder --update</strong></pre>
+
+</div>
+
+<h3><strong><a id="user-content-4-下载或更新你的收藏中的插画作品" class="anchor" href="https://github.com/LCYLYM/pxder#4-%E4%B8%8B%E8%BD%BD%E6%88%96%E6%9B%B4%E6%96%B0%E4%BD%A0%E7%9A%84%E6%94%B6%E8%97%8F%E4%B8%AD%E7%9A%84%E6%8F%92%E7%94%BB%E4%BD%9C%E5%93%81" aria-hidden="true"></a>(4) 下载或更新你的收藏中的插画作品</strong></h3>
+
+<h4><strong><a id="user-content-公开收藏" class="anchor" href="https://github.com/LCYLYM/pxder#%E5%85%AC%E5%BC%80%E6%94%B6%E8%97%8F" aria-hidden="true"></a>公开收藏</strong></h4>
+
+<p><strong>插画会被下载至<code>[bookmark] Public</code>文件夹中</strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder -b
+
+<span class="pl-c"># 或</span>
+
+pxder --bookmark</strong></pre>
+
+</div>
+
+<h4><strong><a id="user-content-私密收藏" class="anchor" href="https://github.com/LCYLYM/pxder#%E7%A7%81%E5%AF%86%E6%94%B6%E8%97%8F" aria-hidden="true"></a>私密收藏</strong></h4>
+
+<p><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">插画会被下载至</span></span><code>[bookmark] Private</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">文件夹中</span></span></strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong>pxder -B
+
+<span class="pl-c"># 或</span>
+
+pxder --bookmark--private</strong></pre>
+
+</div>
+
+<h3><strong><a id="user-content-5-根据指定-pid-下载插画" class="anchor" href="https://github.com/LCYLYM/pxder#5-%E6%A0%B9%E6%8D%AE%E6%8C%87%E5%AE%9A-pid-%E4%B8%8B%E8%BD%BD%E6%8F%92%E7%94%BB" aria-hidden="true"></a>(5) 根据指定 PID 下载插画</strong></h3>
+
+<p><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">插画会被下载至</span></span><code>PID</code><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">文件夹中</span></span></strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pxder -p pid1，pid2，pid3，...</span></span></strong></pre>
+
+</div>
+
+<p><strong>例如</strong></p>
+
+<div class="highlight highlight-source-shell">
+
+<pre><strong><span style="vertical-align: inherit;"><span style="vertical-align: inherit;">pxder -p 70593670,70594912,70595516</span></span></strong></pre>
+
+</div>
+
+<h4><a href="https://github.com/LCYLYM/pxder" target="_blank" rel="noopener noreferrer"><strong>GIT项目地址：https://github.com/Tsuk1ko/pxder</strong></a></h4>
+
+<h4><strong>本程序由<a href="https://github.com/Tsuk1ko">神代绮凛</a>、<a href="https://github.com/simon300000" target="_blank" rel="noopener noreferrer">simon3000</a>和<a href="https://github.com/eternal-flame-AD" target="_blank" rel="noopener noreferrer">饺子</a>制作</strong></h4>
+
+<p><strong>
+<!-- /wp:paragraph -->
+          </div>
+        
+        
+          <footer class="border-t border-amber-500/40 px-4 py-4 bg-black/80">
+            <section class="comments">
+  <h2>评论（4）</h2>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://mikas.tk/" rel="nofollow">萌新</a> · 2019-04-01 20:38:14</div>
+    <p>w(ﾟДﾟ)w哇哦</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://blog.xiaobai0.cn" rel="nofollow">xiaobai0</a> · 2019-04-05 19:24:02</div>
+    <p>学到了学到了</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="http://yozk.cn" rel="nofollow">糖茶大魔王</a> · 2019-04-14 20:58:07</div>
+    <p>哇QVQ 好简单鸭</p>
+  </article>
+  <article class="comment">
+    <div class="comment-meta"><a href="https://loli.by/" rel="nofollow">LYM</a> · 2019-05-01 12:59:43</div>
+    <p>QAQ</p>
+  </article>
+</section>
+          </footer>
+        
+
+        
+        
+        
+        
+          <section class="border-t border-amber-500/40 px-4 py-4 bg-black/90 text-xs">
+            <div class="text-[11px] text-amber-300/80 mb-2 tracking-[0.2em] uppercase">GIT COMMENTS</div>
+            <div class="bg-black/60 border border-amber-500/40 p-2">
+              <script src="https://giscus.app/client.js"
+                      data-repo="LCYLYM/lcylym.github.io"
+                      data-repo-id="R_kgDOQeBtbg"
+                      data-category="General"
+                      data-category-id="DIC_kwDOQeBtbs4CzIBq"
+                      data-mapping="title"
+                      data-strict="0"
+                      data-reactions-enabled="1"
+                      data-emit-metadata="0"
+                      data-input-position="bottom"
+                      data-theme="dark"
+                      data-lang="zh-CN"
+                      crossorigin="anonymous"
+                      async>
+              </script>
+              <noscript class="text-[11px] text-amber-300/70">需要启用 JavaScript 才能加载基于 Git 的评论区。</noscript>
+            </div>
+          </section>
+        
+      </article>
+    </section>
+
+    <aside class="col-span-12 md:col-span-3 flex flex-col gap-3">
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="flex justify-between items-center mb-2">
+          <span class="tracking-[0.25em]">文章状态</span>
+          <span class="text-emerald-400 text-[10px]">正常</span>
+        </div>
+        <div class="space-y-1 text-amber-200/80">
+          <div>字数估计：12177</div>
+          <div>类型：post</div>
+          <div>状态：publish</div>
+        </div>
+      </div>
+      <div class="border border-amber-500/60 bg-black/70 amber-border p-3 text-[11px]">
+        <div class="tracking-[0.25em] mb-2">导航</div>
+        <a href="https://loli.by/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">← 返回首页</a>
+        <a href="https://loli.by/archive/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">归档</a>
+        <a href="https://loli.by/categories/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text-black mb-1 transition-colors">分类</a>
+        <a href="https://loli.by/tags/" class="block px-2 py-1 border border-amber-500/40 hover:bg-amber-400 hover:text黑 transition-colors">标签</a>
+      </div>
+    </aside>
+  </div>
+  
+
+      </div>
+    </main>
+
+    <footer class="border-t border-amber-500/40 text-[11px] text-amber-400/80 bg-black/90 fixed bottom-0 inset-x-0 z-30">
+      <div class="max-w-6xl mx-auto px-3 py-2 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span>© 2025 LCYLYM</span>
+          <span class="hidden sm:inline">· 静态部署：GitHub Pages</span>
+        </div>
+        <div class="flex items-center gap-1">
+          <span class="opacity-60">状态:</span>
+          <span class="text-emerald-400 font-bold">在线</span>
+          <span class="w-2 h-3 bg-amber-400 cursor-block"></span>
+        </div>
+      </div>
+      
+    </footer>
+    <script>
+      // 页面加载动画：最多显示 3s，避免因某些资源 404/超时而卡死在加载界面
+      (function() {
+        const loader = document.getElementById('page-loader');
+        if (!loader) return;
+
+        function hideLoader() {
+          if (!loader || loader.dataset.hidden === '1') return;
+          loader.dataset.hidden = '1';
+          loader.style.display = 'none';
+        }
+
+        // 正常加载完成时隐藏
+        window.addEventListener('load', function () {
+          hideLoader();
+        });
+        // 容错：无论如何最多 3 秒强制隐藏
+        setTimeout(hideLoader, 3000);
+      })();
+
+      // 滚动渐显
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            observer.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+      // 注册 Service Worker 用于 PWA / 安装 App
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').catch(function (e) {
+          console.warn('[sw] register failed', e);
+        });
+      }
+
+      // 安装 App 提醒逻辑（Chrome 等支持 beforeinstallprompt 的浏览器）
+      (function () {
+        let deferredPrompt = null;
+        const bar = document.getElementById('app-install-bar');
+        const btnInstall = document.getElementById('app-install-btn');
+        const btnClose = document.getElementById('app-install-close');
+        if (!bar) return;
+
+        window.addEventListener('beforeinstallprompt', function (e) {
+          e.preventDefault();
+          deferredPrompt = e;
+          bar.classList.remove('hidden');
+        });
+
+        btnInstall && btnInstall.addEventListener('click', async function () {
+          if (!deferredPrompt) return;
+          bar.classList.add('hidden');
+          try {
+            deferredPrompt.prompt();
+            await deferredPrompt.userChoice;
+          } catch (e) {}
+          deferredPrompt = null;
+        });
+
+        btnClose && btnClose.addEventListener('click', function () {
+          bar.classList.add('hidden');
+        });
+      })();
+    </script>
+  </body>
+</html>
